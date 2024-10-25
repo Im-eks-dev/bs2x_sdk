@@ -1,0 +1,32 @@
+#===============================================================================
+# @brief    Nfc SLE sample kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+if HAVE_NFC_POLL
+    comment "NFC poll mode supports NFC SLE master and slave sample"
+    depends on ENABLE_NFC_SLE_SAMPLE
+endif
+
+if HAVE_NFC_LISTEN
+    comment "NFC listen mode supports NFC SLE master sample"
+    depends on ENABLE_NFC_SLE_SAMPLE
+endif
+
+choice NFC_SLE_SAMPLE
+    prompt "choose nfc SLE sample"
+    depends on ENABLE_NFC_SLE_SAMPLE
+    default NFC_SLE_SLAVE_SAMPLE
+    config NFC_SLE_MASTER_SAMPLE
+        bool
+        prompt "Enable NFC SLE master sample."
+        help
+            This option means enable NFC master sample.
+
+    config NFC_SLE_SLAVE_SAMPLE
+        bool
+        prompt "Enable NFC SLE slave sample."
+        depends on HAVE_NFC_POLL
+        help
+            This option means enable NFC slave sample.
+endchoice

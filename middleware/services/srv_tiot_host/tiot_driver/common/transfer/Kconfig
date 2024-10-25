@@ -1,0 +1,86 @@
+menu "Transmit Type Support"
+    comment "Transmit type support."
+    config XMIT_WITH_UART
+        bool "UART"
+    config XMIT_WITH_SPI
+        bool "SPI"
+    config XMIT_WITH_I2C
+        bool "I2C"
+
+    if XMIT_WITH_UART
+        choice
+        prompt "UART Receive mode."
+        default UART_RX_MODE_BUFFED
+        config UART_RX_MODE_BUFFED
+            bool "Receive callback with data."
+            select XFER_DEFAULT_RX_BUFF
+        config UART_RX_MODE_BLOCK
+            bool "Blocking receive."
+        endchoice
+    endif
+
+    if XMIT_WITH_SPI
+        choice
+        prompt "SPI Receive mode."
+        default SPI_RX_MODE_BLOCK
+        config SPI_RX_MODE_BUFFED
+            bool "Receive callback with data."
+            select XFER_DEFAULT_RX_BUFF
+        config SPI_RX_MODE_BLOCK
+            bool "Blocking receive."
+        endchoice
+    endif
+
+    if XMIT_WITH_I2C
+        choice
+        prompt "I2C Receive mode."
+        default I2C_RX_MODE_BLOCK
+        config I2C_RX_MODE_BUFFED
+            bool "Receive callback with data."
+            select XFER_DEFAULT_RX_BUFF
+        config I2C_RX_MODE_BLOCK
+            bool "Blocking receive."
+        endchoice
+    endif
+endmenu
+
+menu "Packet Handle Support"
+    comment "Pakcet handle support."
+    config XFER_PACKET_TIOT
+        bool "TIOT PACKET"
+    config XFER_PACKET_NCI
+        bool "NCI PACKET"
+endmenu
+
+config XFER_DEFAULT_RX_BUFF
+    bool
+    prompt "Has default RX buffer or not"
+    default false
+    help
+        Has default RX buffer or not.
+
+if XFER_DEFAULT_RX_BUFF
+config XFER_RX_BUFF_SIZE
+    int
+    prompt "Default RX buffer size"
+    range 512 4096
+    default 512
+    help
+        Used as deault RX_MODE_BUFFED buffer.
+endif
+
+config XFER_TX_SUPPORT_TASK
+    bool
+    prompt "Support tx task"
+    default n
+    help
+        Will create send task using circular queue.
+
+config XFER_TX_NODE_NUM
+    int
+    prompt "tx queue node num"
+    range 1 128
+    default 16
+    depends on XFER_TX_SUPPORT_TASK
+    help
+        circular queue size must be power of 2.

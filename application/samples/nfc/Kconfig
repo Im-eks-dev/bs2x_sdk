@@ -1,0 +1,24 @@
+#===============================================================================
+# @brief    Nfc sample kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+config ENABLE_NFC_CONTROLLER_SAMPLE
+    bool
+    prompt "Enable the Sample of NFC CONTROLLER."
+    default n
+    depends on ENABLE_NFC_SAMPLE
+    help
+        This option means enable the sample of NFC CONTROLLER.
+
+if ENABLE_NFC_CONTROLLER_SAMPLE
+osource "application/samples/nfc/controller/Kconfig"
+endif
+
+config ENABLE_NFC_TAG_SAMPLE
+    bool
+    prompt "Enable the Sample of NFC TAG."
+    default n
+    depends on ENABLE_NFC_SAMPLE
+    help
+        This option means enable the sample of NFC TAG.

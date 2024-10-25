@@ -1,0 +1,8 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+orsource "xf_app/Kconfig"
+orsource "tasks_xf_entry/Kconfig"
+orsource "port_xf/Kconfig"

@@ -1,0 +1,50 @@
+#===============================================================================
+# @brief    cmake file
+# Copyright (c) @CompanyNameMagicTag 2022-2022. All rights reserved.
+#===============================================================================
+
+set(COMPONENT_NAME "gpu_proc")
+
+set(SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/diag_gpu_proc.c
+)
+
+set(PUBLIC_HEADER
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set(PRIVATE_HEADER
+	${ROOT_DIR}/middleware/utils/common_headers/drivers/gpu
+	${ROOT_DIR}/middleware/chips/brandy/dfx/include
+	${ROOT_DIR}/middleware/services/gpu/drv/include
+)
+
+set(PRIVATE_DEFINES
+)
+
+set(PUBLIC_DEFINES
+)
+
+# use this when you want to add ccflags like -include xxx
+set(COMPONENT_PUBLIC_CCFLAGS
+)
+
+set(COMPONENT_CCFLAGS
+)
+
+set(WHOLE_LINK
+    true
+)
+
+set(MAIN_COMPONENT
+    false
+)
+
+if(DEFINED CONFIG_BUILD_USING_STATIC_LIBRARIES_SDK)
+    if(EXISTS ${ROOT_DIR}/library/${TARGET_COMMAND}/lib${COMPONENT_NAME}.a)
+        set(SOURCES )
+        set(LIBS ${ROOT_DIR}/library/${TARGET_COMMAND}/lib${COMPONENT_NAME}.a)
+    endif()
+endif()
+
+build_component()

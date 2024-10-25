@@ -1,0 +1,21 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+menu "port_xf configuration"
+
+    # 以文件名排序添加子目录，方便比对
+    orsource "port_utils/Kconfig"
+    orsource "port_xf_event/Kconfig"
+    orsource "port_xf_gpio/Kconfig"
+    orsource "port_xf_i2c/Kconfig"
+    orsource "port_xf_pwm/Kconfig"
+    orsource "port_xf_spi/Kconfig"
+    orsource "port_xf_systime/Kconfig"
+    # orsource "port_xf_test/Kconfig" # 仅供参考
+    orsource "port_xf_timer/Kconfig"
+    orsource "port_xf_uart/Kconfig"
+    orsource "port_xf_wifi/Kconfig"
+
+endmenu # "port_xf configuration"

@@ -1,0 +1,19 @@
+config FIRMWARE_CFG_HANDLE_PRIV
+    bool "cfg handle private."
+    default n
+
+config FIRMWARE_CFG_HANDLE_XCI
+    bool "cfg handle xci."
+    default n
+
+config FIRMWARE_CFG_HANDLE_HIBURN
+    bool "cfg handle hiburn."
+    default n
+
+config FIRMWARE_FILE_READ_BUF_LEN
+    int
+    prompt "config firmware file read buff bytes."
+    range 1029 32768  if FIRMWARE_CFG_HANDLE_PRIV=y
+    range 260 32768  if FIRMWARE_CFG_HANDLE_XCI=y
+    range 1029 32768  if FIRMWARE_CFG_HANDLE_HIBURN=y
+    default 1029

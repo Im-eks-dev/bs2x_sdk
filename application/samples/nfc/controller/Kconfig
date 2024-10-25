@@ -1,0 +1,43 @@
+#===============================================================================
+# @brief    Nfc controller sample kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+if HAVE_NFC_POLL
+    comment "Nfc has been selected to work in poll mode, work mode can be selected in middleware configuration."
+    depends on ENABLE_NFC_SAMPLE
+endif
+
+if HAVE_NFC_LISTEN
+    comment "Nfc has been selected to work in listen mode, work mode can be selected in middleware configuration."
+    depends on ENABLE_NFC_SAMPLE
+endif
+
+if HAVE_NFC_TAG
+    comment "Nfc has been selected to work in tag mode, work mode can be selected in middleware configuration."
+    depends on ENABLE_NFC_SAMPLE
+endif
+
+config ENABLE_NFC_SLE_SAMPLE
+    bool
+    prompt "Enable NFC SLE sample."
+    default n
+    depends on (ENABLE_NFC_SAMPLE && (HAVE_NFC_POLL || HAVE_NFC_LISTEN))
+    help
+        This option means enable NFC SLE sample.
+
+if ENABLE_NFC_SLE_SAMPLE
+    osource "application/samples/nfc/controller/sample_nfc_sle/Kconfig"
+endif
+
+config ENABLE_NFC_ONLY_SAMPLE
+    bool
+    prompt "Enable NFC only sample."
+    default n
+    depends on (ENABLE_NFC_SAMPLE && (HAVE_NFC_POLL || HAVE_NFC_LISTEN))
+    help
+        This option means enable NFC only sample.
+
+if ENABLE_NFC_ONLY_SAMPLE
+    osource "application/samples/nfc/controller/sample_nfc_only/Kconfig"
+endif

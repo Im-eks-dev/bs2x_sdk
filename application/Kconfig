@@ -1,0 +1,40 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+config SAMPLE_ENABLE
+    bool
+    prompt "Enable Sample."
+    default n
+    help
+        This option means support Samples.
+
+if SAMPLE_ENABLE
+osource "application/samples/Kconfig"
+endif
+
+config PORTING_XF_ENABLE
+    bool
+    prompt "Enable porting XF."
+    default y
+    help
+        This option means support porting XF.
+
+if PORTING_XF_ENABLE
+choice
+    prompt "BS21 PORTING XF VERSION."
+    default BS21_PORTING_XF_V0_2_X
+    config  BS21_PORTING_XF_V0_2_X
+        bool "XF V0.2.x"
+endchoice
+
+config BS21_PORTING_XF_VERSION
+    int 
+    default 2 if BS21_PORTING_XF_V0_2_X
+
+if BS21_PORTING_XF_V0_2_X
+osource "application/bs21_porting_xf_0p2/Kconfig"
+endif
+
+endif

@@ -1,0 +1,20 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+menu "port_xf_uart configuration"
+
+    choice
+        prompt "port_xf_uart sample"
+        default PORT_XF_UART_INT_TRANSFER_MODE
+        # POLL 和 DMA 暂不支持
+        # config PORT_XF_UART_POLL_TRANSFER_MODE
+        #     bool "Choose UART poll transfer mode."
+        config PORT_XF_UART_INT_TRANSFER_MODE
+            bool "Choose UART interrupt transfer mode."
+        # config PORT_XF_UART_DMA_TRANSFER_MODE
+        #     bool "Choose UART dma transfer mode."
+    endchoice
+
+endmenu # "tasks_xf_entry configuration"

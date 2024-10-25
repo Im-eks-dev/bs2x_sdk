@@ -1,0 +1,9 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+config XF_APP_BUILD_FROM_SOURCE
+    bool
+    prompt "Build xf_app from the source code and, if closed, link the xf_app static library."
+    default y

@@ -1,0 +1,10 @@
+config PM_WAKEUP_BY_UART
+    bool "Wakeup by UART"
+    depends on XMIT_WITH_UART
+
+config PM_MANAGE_LOWPOWER
+    bool
+    prompt "Manage lowpower"
+    default y
+    help
+        This option means support lowpower.
