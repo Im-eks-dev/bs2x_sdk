@@ -24,7 +24,6 @@
 #include "xf_init.h"
 
 #include "xf_log.h"
-#include "xf_log_port.h"
 
 #include "xf_sys.h"
 
