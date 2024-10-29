@@ -12,11 +12,9 @@
 /* ==================== [Includes] ========================================== */
 
 #include "xf_log.h"
-#include "xf_log_port.h"
 #include "xf_init.h"
 #include "osal_debug.h"
 #include "tcxo.h"
-#include "port_xf_log.h"
 
 /* ==================== [Defines] =========================================== */
 
@@ -24,35 +22,25 @@
 
 /* ==================== [Static Prototypes] ================================= */
 
-static size_t log_backend(char *p_buf, size_t buf_size, xf_log_backend_args_t *p_args);
-static int _putchar(int c);
-
 /* ==================== [Static Variables] ================================== */
 
 /* ==================== [Macros] ============================================ */
 
 /* ==================== [Global Functions] ================================== */
 
-void port_xf_log_init(void)
-{
-    xf_log_set_backend(log_backend);
-    xf_printf_set_putchar(_putchar);
-}
-
 /* ==================== [Static Functions] ================================== */
 
-static size_t log_backend(char *p_buf, size_t buf_size, xf_log_backend_args_t *p_args)
+static void xf_log_out(const char *str, size_t len, void *arg)
 {
-    UNUSED(p_args);
-    if ((NULL == p_buf) || (0 == buf_size)) {
-        return 0;
+    if ((NULL == str) || (0 == len)) {
+        return;
     }
-    osal_printk("%.*s", buf_size, p_buf);
-    return buf_size;
+    osal_printk("%.*s", (int)len, str);
 }
 
-static int _putchar(int c)
+static int port_log_init(void)
 {
-    osal_printk("%c", c);
-    return c;
+    xf_log_register_obj(xf_log_out, NULL);
+    return 0;
 }
+XF_INIT_EXPORT_SETUP(port_log_init);

@@ -9,7 +9,6 @@
 #include "xf_init.h"
 #include "osal_task.h"
 #include "tcxo.h"
-#include "port_xf_log.h"
 #include "pinctrl.h"
 #include "gpio.h"
 #include "hal_reboot.h"
@@ -27,17 +26,9 @@
 
 /* ==================== [Static Prototypes] ================================= */
 
-static void _preinit(void);
-static void _predeinit(void);
-
 /* ==================== [Static Variables] ================================== */
 
 #define TAG "tasks_xf_entry"
-
-static const xf_init_preinit_ops_t preinit_ops = {
-    .preinit        = _preinit,
-    .predeinit      = _predeinit,
-};
 
 /* ==================== [Macros] ============================================ */
 
@@ -48,7 +39,11 @@ static const xf_init_preinit_ops_t preinit_ops = {
 static void *tasks_xf_premain(const char *arg)
 {
     unused(arg);
-    xfusion_run(&preinit_ops);
+    xfusion_init();
+    while (1)
+    {
+        xfusion_run();
+    }
     return NULL;
 }
 
@@ -90,13 +85,3 @@ static void tasks_xf_entry(void)
     osal_kthread_unlock();
 }
 app_run(tasks_xf_entry); /*!< Run the tasks_xf_entry. */
-
-static void _preinit(void)
-{
-    port_xf_log_init();
-}
-
-static void _predeinit(void)
-{
-
-}
