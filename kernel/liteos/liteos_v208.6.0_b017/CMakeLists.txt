@@ -55,6 +55,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/Huawei_LiteOS/compat/cmsis/
 ${CMAKE_CURRENT_SOURCE_DIR}/Huawei_LiteOS/open_source/CMSIS/CMSIS/RTOS/LiteOS/INC/
 ${CMAKE_CURRENT_SOURCE_DIR}/Huawei_LiteOS/open_source/CMSIS/Core/Include
 ${CMAKE_CURRENT_SOURCE_DIR}/Huawei_LiteOS/open_source/CMSIS/CMSIS/RTOS2/Include
+${CMAKE_CURRENT_SOURCE_DIR}/Huawei_LiteOS/targets/aiot/${LITEOS_PLATFORM}/include
 )
 
 target_include_directories(${COMPONENT_NAME}_interface
