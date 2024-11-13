@@ -188,7 +188,6 @@ xf_err_t xf_sle_ssapc_discover_service(
     };
     PORT_SLE_SET_WS63_UUID_FROM_XF_UUID(&struct_found.uuid, &param->uuid);
 
-
     xf_err_t ret = ssapc_find_structure(
                        app_id, conn_id, &struct_found);
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
@@ -208,7 +207,7 @@ xf_err_t xf_sle_ssapc_discover_service(
             xf_ret = XF_OK;
             break;
         }
-        osal_mdelay(INTERVAL_MS_CHECK_ATTR_ADD);
+        osal_msleep(INTERVAL_MS_CHECK_ATTR_ADD);
         ++cnt_timeout;
     }
 

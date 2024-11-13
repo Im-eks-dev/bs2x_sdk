@@ -538,7 +538,7 @@ xf_err_t xf_ble_gatts_add_service_to_app_profile(
             goto check_end;
         }
 continue_to_check:
-        osal_mdelay(INTERVAL_MS_CHECK_ATTR_ADD);
+        osal_msleep(INTERVAL_MS_CHECK_ATTR_ADD);
         ++cnt_timeout;
         if (cnt_timeout >= TIMEOUT_CNT_CHECK_ATTR_ADD) {
             xf_ret = XF_ERR_TIMEOUT;
