@@ -34,7 +34,7 @@ static xf_ble_appearance_t s_appearance = 0XFFFF;
 // 使能 BLE 协议栈
 xf_err_t xf_ble_enable(void)
 {
-    osal_mdelay(1000);
+    osal_msleep(1000);
     errcode_t ret = enable_ble();
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
              TAG, "enable_ble failed!:%#X", ret);

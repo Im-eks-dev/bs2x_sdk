@@ -7,6 +7,7 @@
 #include "xf_heap.h"
 
 #include "port_utils.h"
+#include "port_xf_systime.h"
 
 #include "common_def.h"
 #include "soc_osal.h"
@@ -81,8 +82,6 @@ static queue_desc_found_t s_queue_desc_found = {
 /* ==================== [Static Variables] ================================== */
 
 /* ==================== [Macros] ============================================ */
-
-#define port_delay_ms(ms)     osal_mdelay(ms)
 
 /* ==================== [Global Functions] ================================== */
 
@@ -320,7 +319,7 @@ xf_err_t xf_ble_gattc_discover_service(
             break;
         }
         cnt_service = s_queue_service_found.cnt;
-        port_delay_ms(INTERVAL_MS_CHECK_DISCOVERY_RESULT);
+        port_sleep_ms(INTERVAL_MS_CHECK_DISCOVERY_RESULT);
     }
 
     /* 将获取搜寻到的服务信息填充至 (*out_service_set) */
@@ -440,7 +439,7 @@ xf_err_t xf_ble_gattc_discover_chara(
             break;
         }
         cnt_chara = s_queue_chara_found.cnt;
-        port_delay_ms(INTERVAL_MS_CHECK_DISCOVERY_RESULT);
+        port_sleep_ms(INTERVAL_MS_CHECK_DISCOVERY_RESULT);
     }
 
     /* 将获取搜寻到的服务信息填充至 (*out_chara_set) */
@@ -524,7 +523,7 @@ xf_err_t xf_ble_gattc_discovery_desc_all(
             break;
         }
         cnt_desc = s_queue_desc_found.cnt;
-        port_delay_ms(INTERVAL_MS_CHECK_DISCOVERY_RESULT);
+        port_sleep_ms(INTERVAL_MS_CHECK_DISCOVERY_RESULT);
     }
 
     /* 将获取搜寻到的服务信息填充至 (*out_desc_set) */
