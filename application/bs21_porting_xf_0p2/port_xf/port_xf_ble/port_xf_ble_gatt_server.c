@@ -432,8 +432,8 @@ static void ble_gap_terminate_adv_cb(
     XF_LOGI(TAG, "ble_gap_terminate_adv_cb status: %d\n", status);
 }
 
-xf_err_t xf_ble_gatts_register_app_profile(
-    xf_bt_uuid_info_t *app_uuid, uint8_t *app_id)
+xf_err_t xf_ble_gatts_app_register(
+    xf_ble_uuid_info_t *app_uuid, uint8_t *app_id)
 {
     bt_uuid_t app_uuid_param = {
         .uuid_len = app_uuid->len_type,
@@ -451,7 +451,7 @@ xf_err_t xf_ble_gatts_register_app_profile(
     return XF_OK;
 }
 
-xf_err_t xf_ble_gatts_unregister_app_profile(uint8_t app_id)
+xf_err_t xf_ble_gatts_app_unregister(uint8_t app_id)
 {
     errcode_t ret = gatts_unregister_server(app_id);
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
@@ -590,7 +590,7 @@ xf_err_t xf_ble_gatts_send_notification(
     xf_ble_gatts_ntf_ind_t *param)
 {
     gatts_ntf_ind_t ntf_ind_param = {
-        .attr_handle = param->chara_value_handle,
+        .attr_handle = param->handle,
         .value = param->value,
         .value_len = param->value_len
     };
@@ -607,7 +607,7 @@ xf_err_t xf_ble_gatts_send_indication(
     xf_ble_gatts_ntf_ind_t *param)
 {
     gatts_ntf_ind_t ntf_ind_param = {
-        .attr_handle = param->chara_value_handle,
+        .attr_handle = param->handle,
         .value = param->value,
         .value_len = param->value_len
     };
@@ -626,7 +626,7 @@ xf_err_t xf_ble_gatts_send_response(
     gatts_send_rsp_t rsp_param = {
         .status = err_code,
         .value = rsp->value,
-        .value_len = rsp->len,
+        .value_len = rsp->value_len,
         .offset = rsp->offset,
         .request_id = trans_id // ?
     };

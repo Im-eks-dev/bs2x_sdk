@@ -52,14 +52,14 @@ xf_err_t xf_ble_disable(void)
 
 // 设置本地设备地址
 xf_err_t xf_ble_gap_set_local_addr(
-    uint8_t addr[XF_BT_DEV_ADDR_LEN],
-    xf_bt_dev_addr_type_t type)
+    uint8_t addr[XF_BLE_ADDR_LEN],
+    xf_ble_addr_type_t type)
 {
     XF_CHECK(addr == NULL, XF_ERR_INVALID_ARG,
              TAG, "xf_ble_gap_set_local_addr failed!:addr == NULL");
 
     bd_addr_t dev_addr = {.type = type};
-    memcpy(dev_addr.addr, addr, XF_BT_DEV_ADDR_LEN);
+    memcpy(dev_addr.addr, addr, XF_BLE_ADDR_LEN);
 
     errcode_t ret = gap_ble_set_local_addr(&dev_addr);
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
@@ -68,7 +68,7 @@ xf_err_t xf_ble_gap_set_local_addr(
 }
 
 // 获取本地设备地址
-xf_err_t xf_ble_gap_get_local_addr(xf_bt_dev_addr_t *addr)
+xf_err_t xf_ble_gap_get_local_addr(xf_ble_addr_t *addr)
 {
     XF_CHECK(addr == NULL, XF_ERR_INVALID_ARG,
              TAG, "xf_ble_gap_get_local_addr failed!:addr == NULL");
@@ -78,7 +78,7 @@ xf_err_t xf_ble_gap_get_local_addr(xf_bt_dev_addr_t *addr)
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
              TAG, "gap_ble_get_local_addr failed!:%#X", ret);
 
-    memcpy(addr->addr, dev_addr.addr, XF_BT_DEV_ADDR_LEN);
+    memcpy(addr->addr, dev_addr.addr, XF_BLE_ADDR_LEN);
     addr->type = dev_addr.type;
     return XF_OK;
 }
@@ -133,8 +133,8 @@ xf_err_t xf_ble_gap_set_adv_data(
     uint8_t cnt = 0;
     uint16_t adv_data_size_all = 0;
     while (data->adv_struct_set[cnt].ad_data_len != 0) {
-        adv_data_size_all += XF_BLE_GAP_ADV_STRUCT_LEN_SIZE
-                             + XF_BLE_GAP_ADV_STRUCT_AD_TYPE_SIZE
+        adv_data_size_all += XF_BLE_GAP_ADV_STRUCT_LEN_FIELD_SIZE
+                             + XF_BLE_GAP_ADV_STRUCT_AD_TYPE_FIELD_SIZE
                              + data->adv_struct_set[cnt].ad_data_len;
         ++cnt;
     }
@@ -158,7 +158,7 @@ xf_err_t xf_ble_gap_set_adv_data(
             // 获取整个 adv_struct 大小
             adv_struct_size = sizeof(std_adv_struct_t);
             // > 设置 struct_data_len：sizeof(ad_type(1Byte)+ad_data) 或 整个 adv_struct 大小 - struct_data_len
-            adv_struct->struct_data_len = adv_struct_size - XF_BLE_GAP_ADV_STRUCT_LEN_SIZE;
+            adv_struct->struct_data_len = adv_struct_size - XF_BLE_GAP_ADV_STRUCT_LEN_FIELD_SIZE;
             // > 设置 ad_type
             adv_struct->ad_type = data->adv_struct_set[cnt].ad_type;
 
@@ -178,7 +178,7 @@ xf_err_t xf_ble_gap_set_adv_data(
             // // 获取整个 adv_struct 大小
             // adv_struct_size = sizeof(std_adv_struct_t);
             // // > 设置 struct_data_len：sizeof(ad_type(1Byte)+ad_data) 或 整个 adv_struct 大小 - struct_data_len
-            // adv_struct.struct_data_len = adv_struct_size - XF_BLE_GAP_ADV_STRUCT_LEN_SIZE;
+            // adv_struct.struct_data_len = adv_struct_size - XF_BLE_GAP_ADV_STRUCT_LEN_FIELD_SIZE;
             // // > 设置 ad_type
             // adv_struct.ad_type = data->adv_struct_set[cnt].ad_type;
             // // > 设置 ad_type
@@ -227,8 +227,8 @@ xf_err_t xf_ble_gap_set_adv_param(
         .duration = param->duration,
     };
 
-    memcpy(adv_param.own_addr.addr, param->own_addr.addr, XF_BT_DEV_ADDR_LEN);
-    memcpy(adv_param.peer_addr.addr, param->peer_addr.addr, XF_BT_DEV_ADDR_LEN);
+    memcpy(adv_param.own_addr.addr, param->own_addr.addr, XF_BLE_ADDR_LEN);
+    memcpy(adv_param.peer_addr.addr, param->peer_addr.addr, XF_BLE_ADDR_LEN);
 
     errcode_t ret = gap_ble_set_adv_param(
                         BLE_GAP_ADV_HANDLE_DEFAULT, &adv_param);
@@ -313,10 +313,10 @@ xf_err_t xf_ble_gap_update_conn_params(
 
 // 与设备建立（ACL）连接  IDF: 没有 直接嵌在 gattc_open之中 FRQ：有，且需传入上面的各项连接参数
 xf_err_t xf_ble_gap_connect(
-    const xf_bt_dev_addr_t *addr)
+    const xf_ble_addr_t *addr)
 {
     bd_addr_t dev_addr = {.type = addr->type};
-    memcpy(dev_addr.addr, addr->addr, XF_BT_DEV_ADDR_LEN);
+    memcpy(dev_addr.addr, addr->addr, XF_BLE_ADDR_LEN);
 
     errcode_t ret = gap_ble_connect_remote_device(&dev_addr);
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
@@ -325,10 +325,10 @@ xf_err_t xf_ble_gap_connect(
 }
 // 断开设备连接，包括所有profile连接
 xf_err_t xf_ble_gap_disconnect(
-    const xf_bt_dev_addr_t *addr)
+    const xf_ble_addr_t *addr)
 {
     bd_addr_t dev_addr = {.type = addr->type};
-    memcpy(dev_addr.addr, addr->addr, XF_BT_DEV_ADDR_LEN);
+    memcpy(dev_addr.addr, addr->addr, XF_BLE_ADDR_LEN);
 
     errcode_t ret = gap_ble_disconnect_remote_device(&dev_addr);
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
@@ -337,10 +337,10 @@ xf_err_t xf_ble_gap_disconnect(
 }
 /* 配对 */
 // 发起/启动配对
-xf_err_t xf_ble_gap_add_pair(const xf_bt_dev_addr_t *addr)
+xf_err_t xf_ble_gap_add_pair(const xf_ble_addr_t *addr)
 {
     bd_addr_t dev_addr = {.type = addr->type};
-    memcpy(dev_addr.addr, addr->addr, XF_BT_DEV_ADDR_LEN);
+    memcpy(dev_addr.addr, addr->addr, XF_BLE_ADDR_LEN);
 
     errcode_t ret = gap_ble_pair_remote_device(&dev_addr);
     XF_CHECK( ret != ERRCODE_SUCC, (xf_err_t)ret, 
@@ -349,10 +349,10 @@ xf_err_t xf_ble_gap_add_pair(const xf_bt_dev_addr_t *addr)
 }
 
 // 取消指定设备的配对
-xf_err_t xf_ble_gap_del_pair(const xf_bt_dev_addr_t *addr)
+xf_err_t xf_ble_gap_del_pair(const xf_ble_addr_t *addr)
 {
     bd_addr_t dev_addr = {.type = addr->type};
-    memcpy(dev_addr.addr, addr->addr, XF_BT_DEV_ADDR_LEN);
+    memcpy(dev_addr.addr, addr->addr, XF_BLE_ADDR_LEN);
 
     errcode_t ret = gap_ble_remove_pair(&dev_addr);
     XF_CHECK( ret != ERRCODE_SUCC, (xf_err_t)ret, 
@@ -371,7 +371,7 @@ xf_err_t xf_ble_gap_del_pair_all(void)
 
 // 获取已配对的设备
 xf_err_t xf_ble_gap_get_pair_list(
-    uint16_t *max_num, xf_bt_dev_addr_t *dev_list)
+    uint16_t *max_num, xf_ble_addr_t *dev_list)
 {
     bd_addr_t *ws63_dev_list = (bd_addr_t *)xf_malloc(sizeof(bd_addr_t)*(*max_num));
     XF_CHECK( ws63_dev_list == NULL, XF_ERR_NO_MEM, 
@@ -385,7 +385,7 @@ xf_err_t xf_ble_gap_get_pair_list(
     {
         dev_list[num_get].type = ws63_dev_list[num_get].type;
         memcpy(dev_list[num_get].addr,
-            ws63_dev_list[num_get].addr, XF_BT_DEV_ADDR_LEN);
+            ws63_dev_list[num_get].addr, XF_BLE_ADDR_LEN);
     }
     xf_free(ws63_dev_list);
     return XF_OK;
@@ -393,7 +393,7 @@ xf_err_t xf_ble_gap_get_pair_list(
 
 // 获取已绑定的设备
 xf_err_t xf_ble_gap_get_bond_list(
-    int *max_num, xf_bt_dev_addr_t *dev_list)
+    int *max_num, xf_ble_addr_t *dev_list)
 {
     bd_addr_t *ws63_dev_list = (bd_addr_t *)xf_malloc(sizeof(bd_addr_t)*(*max_num));
     XF_CHECK( ws63_dev_list == NULL, XF_ERR_NO_MEM, 
@@ -407,7 +407,7 @@ xf_err_t xf_ble_gap_get_bond_list(
     {
         dev_list[num_get].type = ws63_dev_list[num_get].type;
         memcpy(dev_list[num_get].addr,
-            ws63_dev_list[num_get].addr, XF_BT_DEV_ADDR_LEN);
+            ws63_dev_list[num_get].addr, XF_BLE_ADDR_LEN);
     }
     xf_free(ws63_dev_list);
     return XF_OK;

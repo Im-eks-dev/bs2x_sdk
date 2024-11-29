@@ -100,7 +100,7 @@ xf_err_t xf_sle_ssaps_event_cb_register(
 
 
 // 注册 ssap 服务端应用
-xf_err_t xf_sle_ssaps_register_app(
+xf_err_t xf_sle_ssaps_app_register(
     xf_sle_uuid_info_t *app_uuid, uint8_t *app_id)
 {
     PORT_SLE_DEF_WS63_UUID_FROM_XF_UUID(param_app_uuid, app_uuid);
@@ -112,7 +112,7 @@ xf_err_t xf_sle_ssaps_register_app(
 }
 
 // 注销 ssap 服务端应用
-xf_err_t xf_sle_ssaps_unregister_app(uint8_t app_id)
+xf_err_t xf_sle_ssaps_app_unregister(uint8_t app_id)
 {
     xf_err_t ret = ssaps_unregister_server(app_id);
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
@@ -221,7 +221,7 @@ xf_err_t xf_sle_ssaps_stop_service(
 }
 
 // 删除所有 GATT 服务
-xf_err_t xf_ble_ssaps_del_services_all(uint8_t app_id)
+xf_err_t xf_sle_ssaps_del_services_all(uint8_t app_id)
 {
     xf_err_t ret = ssaps_delete_all_services(app_id);
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
@@ -230,7 +230,7 @@ xf_err_t xf_ble_ssaps_del_services_all(uint8_t app_id)
 }
 
 // 发送请求的响应
-xf_err_t xf_ble_ssaps_send_response(
+xf_err_t xf_sle_ssaps_send_response(
     uint8_t app_id, uint16_t conn_id,
     uint32_t trans_id, xf_sle_ssap_err_t err_code,
     xf_sle_ssaps_response_value_t *rsp)

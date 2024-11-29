@@ -183,7 +183,7 @@ static void port_ble_gattc_notification_cb(
                 .app_id = client_id,
                 .conn_id = conn_id,
                 .handle = data->handle,
-                .is_notify = true,
+                .is_ntf = true,
                 .value = data->data,
                 .value_len = data->data_len,
                 // .peer_addr
@@ -208,7 +208,7 @@ static void port_ble_gattc_indication_cb(
             .app_id = client_id,
             .conn_id = conn_id,
             .handle = data->handle,
-            .is_notify = false,
+            .is_ntf = false,
             .value = data->data,
             .value_len = data->data_len,
             // .peer_addr
@@ -222,8 +222,8 @@ static void port_ble_gattc_indication_cb(
  *
  */
 
-xf_err_t xf_ble_gattc_register_app_profile(
-    xf_bt_uuid_info_t *app_uuid, uint8_t *app_id)
+xf_err_t xf_ble_gattc_app_register(
+    xf_ble_uuid_info_t *app_uuid, uint8_t *app_id)
 {
     bt_uuid_t app_uuid_param = {.uuid_len = app_uuid->len_type};
     memcpy(app_uuid_param.uuid, app_uuid->uuid128,
@@ -235,7 +235,7 @@ xf_err_t xf_ble_gattc_register_app_profile(
     return XF_OK;
 }
 
-xf_err_t xf_ble_gattc_unregister_app_profile(uint8_t app_id)
+xf_err_t xf_ble_gattc_app_unregister(uint8_t app_id)
 {
     errcode_t ret = gattc_unregister_client(app_id);
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
@@ -261,7 +261,7 @@ xf_err_t xf_ble_gattc_unregister_app_profile(uint8_t app_id)
  */
 xf_err_t xf_ble_gattc_discover_service(
     uint8_t app_id, uint16_t conn_id,
-    xf_bt_uuid_info_t *svc_uuid,
+    xf_ble_uuid_info_t *svc_uuid,
     xf_ble_gattc_service_found_set_t **out_service_set)
 {
     XF_CHECK(out_service_set == NULL, XF_ERR_INVALID_ARG,
@@ -377,7 +377,7 @@ xf_err_t xf_ble_gattc_discover_chara(
     uint8_t app_id, uint16_t conn_id,
     uint16_t start_handle,
     uint16_t end_handle,
-    xf_bt_uuid_info_t *chara_uuid,
+    xf_ble_uuid_info_t *chara_uuid,
     xf_ble_gattc_chara_found_set_t **out_chara_set)
 {
     unused(end_handle);
@@ -567,8 +567,8 @@ xf_err_t xf_ble_gattc_discovery_desc_by_chara_uuid(
     uint8_t app_id, uint16_t conn_id,
     uint16_t start_handle,
     uint16_t end_handle,
-    xf_bt_uuid_info_t chara_uuid,
-    xf_bt_uuid_info_t desc_uuid,
+    xf_ble_uuid_info_t chara_uuid,
+    xf_ble_uuid_info_t desc_uuid,
     uint16_t *count)
 {
     unused(app_id);
@@ -586,7 +586,7 @@ xf_err_t xf_ble_gattc_discover_desc_by_chara_handle(
     uint16_t start_handle,
     uint16_t end_handle,
     uint16_t chara_handle,
-    xf_bt_uuid_info_t desc_uuid,
+    xf_ble_uuid_info_t desc_uuid,
     uint16_t *count)
 {
     unused(app_id);
@@ -718,7 +718,7 @@ xf_err_t xf_ble_gattc_request_read_by_uuid(
     uint8_t app_id, uint16_t conn_id,
     uint16_t start_handle,
     uint16_t end_handle,
-    const xf_bt_uuid_info_t *chara_val_uuid)
+    const xf_ble_uuid_info_t *chara_val_uuid)
 {
     gattc_read_req_by_uuid_param_t  uuid_param = {
         .uuid.uuid_len = chara_val_uuid->len_type,
