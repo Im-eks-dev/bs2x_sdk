@@ -137,7 +137,7 @@ xf_err_t xf_sle_ssapc_event_cb_register(
 
 
 // 注册ssap客户端
-xf_err_t xf_sle_ssapc_register_app(
+xf_err_t xf_sle_ssapc_app_register(
     xf_sle_uuid_info_t *app_uuid, uint8_t *app_id)
 {
     PORT_SLE_DEF_WS63_UUID_FROM_XF_UUID(param_app_uuid, app_uuid);
@@ -149,7 +149,7 @@ xf_err_t xf_sle_ssapc_register_app(
 }
 
 // 注销ssap客户端
-xf_err_t xf_sle_ssapc_unregister_app(uint8_t app_id)
+xf_err_t xf_sle_ssapc_app_unregister(uint8_t app_id)
 {
     xf_err_t ret = ssapc_unregister_client(app_id);
     XF_CHECK(ret != ERRCODE_SUCC, (xf_err_t)ret,
@@ -216,7 +216,7 @@ xf_err_t xf_sle_ssapc_discover_service(
     return xf_ret;
 }
 
-xf_err_t xf_ble_ssapc_discovery_property(
+xf_err_t xf_sle_ssapc_discovery_property(
     uint8_t app_id, uint16_t conn_id,
     xf_sle_ssapc_find_struct_param_t *param)
 {
@@ -262,7 +262,7 @@ xf_err_t xf_sle_ssapc_request_read_by_uuid(
 // 以句柄发送（特征值）写数据请求
 xf_err_t xf_sle_ssapc_request_write_data(
     uint8_t app_id, uint16_t conn_id,
-    uint8_t type, uint16_t handle,
+    uint16_t handle, uint8_t type,
     uint8_t *data, uint16_t data_len)
 {
     ssapc_write_param_t param = {
