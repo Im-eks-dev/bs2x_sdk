@@ -1,0 +1,52 @@
+config ENABLE_ALL_SLE_SAMPLE
+    bool
+    prompt "Enable all the sample of sle, it's just for build."
+    default n
+    depends on SAMPLE_SUPPORT_SLE_SAMPLE
+    select SAMPLE_SUPPORT_SLE_HID_SERVER
+    select SAMPLE_SUPPORT_SLE_DIS_SERVER
+    select SAMPLE_SUPPORT_SLE_BAS_SERVER
+    select SAMPLE_SUPPORT_SLE_UART_SERVER
+    select SAMPLE_SUPPORT_SLE_UART_CLIENT
+    help
+        This option means enable all the sample of sle, it is just for build.
+
+config SAMPLE_SUPPORT_SLE_UART_SERVER
+    bool
+    prompt "Support Sle UART Server sample."
+    default n
+    depends on SAMPLE_SUPPORT_SLE_SAMPLE
+    help
+        This option means support Sle UART Server sample.
+
+config SAMPLE_SUPPORT_SLE_UART_CLIENT
+    bool
+    prompt "Support Sle UART Client sample."
+    default n
+    depends on SAMPLE_SUPPORT_SLE_SAMPLE
+    help
+        This option means support Sle UART Client sample.
+
+config SAMPLE_SUPPORT_SLE_HID_SERVER
+    bool
+    prompt "Support Sle HID Server sample."
+    default n
+    depends on SAMPLE_SUPPORT_SLE_SAMPLE
+    help
+        This option means support Sle HID Server sample.
+
+config SAMPLE_SUPPORT_SLE_DIS_SERVER
+    bool
+    prompt "Support Sle DIS Server sample."
+    default n
+    depends on SAMPLE_SUPPORT_SLE_SAMPLE
+    help
+        This option means support Sle DIS Server sample.
+
+config SAMPLE_SUPPORT_SLE_BAS_SERVER
+    bool
+    prompt "Support Sle BAS Server sample."
+    default n
+    depends on SAMPLE_SUPPORT_SLE_SAMPLE
+    help
+        This option means support Sle BAS Server sample.

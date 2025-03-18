@@ -1,0 +1,61 @@
+config ENABLE_ALL_BLE_SAMPLE
+    bool
+    prompt "Enable all the sample of ble, it's just for build."
+    default n
+    depends on SAMPLE_SUPPORT_BLE_SAMPLE
+    select SAMPLE_SUPPORT_BLE_GATT_CLIENT
+    select SAMPLE_SUPPORT_BLE_KEYBOARD_SERVER
+    select SAMPLE_SUPPORT_BLE_MOUSE_SERVER
+    select SAMPLE_SUPPORT_BLE_UUID_SERVER
+    select SAMPLE_SUPPORT_BLE_WIFI_CFG_CLIENT
+    select SAMPLE_SUPPORT_BLE_WIFI_CFG_SERVER
+    help
+        This option means enable all the sample of ble,it is just for build.
+
+config SAMPLE_SUPPORT_BLE_GATT_CLIENT
+    bool
+    prompt "Support Ble gatt client sample."
+    default n
+    depends on SAMPLE_SUPPORT_BLE_SAMPLE
+    help
+        This option means support Ble gatt client sample.
+
+config SAMPLE_SUPPORT_BLE_KEYBOARD_SERVER
+    bool
+    prompt "Support Ble keyboard server sample."
+    default n
+    depends on SAMPLE_SUPPORT_BLE_SAMPLE
+    help
+        This option means support Ble keyboard server sample.
+
+config SAMPLE_SUPPORT_BLE_MOUSE_SERVER
+    bool
+    prompt "Support Ble mouse server sample."
+    default n
+    depends on SAMPLE_SUPPORT_BLE_SAMPLE
+    help
+        This option means support Ble mouse server sample.
+
+config SAMPLE_SUPPORT_BLE_UUID_SERVER
+    bool
+    prompt "Support Ble uuid server sample."
+    default n
+    depends on SAMPLE_SUPPORT_BLE_SAMPLE
+    help
+        This option means support Ble uuid server sample.
+
+config SAMPLE_SUPPORT_BLE_WIFI_CFG_CLIENT
+    bool
+    prompt "Support Ble wifi config client sample."
+    default n
+    depends on SAMPLE_SUPPORT_BLE_SAMPLE
+    help
+        This option means support Ble wifi config client sample.
+
+config SAMPLE_SUPPORT_BLE_WIFI_CFG_SERVER
+    bool
+    prompt "Support Ble wifi config server sample."
+    default n
+    depends on SAMPLE_SUPPORT_BLE_SAMPLE
+    help
+        This option means support Ble wifi config server sample.

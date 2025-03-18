@@ -1,0 +1,94 @@
+config W33_DEV_NUM
+    int "W33 device number."
+    range 1 2
+    default 1
+
+choice
+    prompt "Transmit Type."
+    default W33_UART
+    config W33_UART
+        bool "UART"
+        select XMIT_WITH_UART
+        select FIRMWARE_CFG_HANDLE_PRIV
+        select XFER_PACKET_TIOT
+    config W33_SPI
+        bool "SPI"
+        select XMIT_WITH_SPI
+        select FIRMWARE_CFG_HANDLE_XCI
+        select XFER_PACKET_NCI
+endchoice
+
+choice
+    prompt "Wakeup Type."
+    default W33_WAKEUP_TYPE_UART
+    config W33_WAKEUP_TYPE_GPIO
+        bool "GPIO"
+    config W33_WAKEUP_TYPE_UART
+        bool "UART"
+        depends on W33_UART
+        select PM_WAKEUP_BY_UART
+endchoice
+
+choice
+    prompt "TCXO frequency select."
+    default W33_TCXO_FREQ_38P4M
+    config W33_TCXO_FREQ_24M
+        bool "24M"
+    config W33_TCXO_FREQ_32M
+        bool "32M"
+    config W33_TCXO_FREQ_38P4M
+        bool "38.4M"
+    config W33_TCXO_FREQ_40M
+        bool "40M"
+    config W33_TCXO_FREQ_96M
+        bool "96M"
+endchoice
+
+if W33_TCXO_FREQ_24M
+config W33_TCXO_FREQ
+    int "TCXO frequency"
+    range 24000000 24000000
+    default 24000000
+endif
+if W33_TCXO_FREQ_32M
+config W33_TCXO_FREQ
+    int "TCXO frequency"
+    range 32000000 32000000
+    default 32000000
+endif
+if W33_TCXO_FREQ_38P4M
+config W33_TCXO_FREQ
+    int "TCXO frequency"
+    range 38400000 38400000
+    default 38400000
+endif
+if W33_TCXO_FREQ_40M
+config W33_TCXO_FREQ
+    int "TCXO frequency"
+    range 40000000 40000000
+    default 40000000
+endif
+if W33_TCXO_FREQ_96M
+config W33_TCXO_FREQ
+    int "TCXO frequency"
+    range 96000000 96000000
+    default 96000000
+endif
+
+config W33_UART_BAUDRATE
+    int "UART communication baudrate."
+    range 115200 2500000
+    default 115200
+    depends on W33_UART
+
+config W33_UART_WITH_FLOWCTRL
+    bool "UART with hardware flow control(CTS&RTS)."
+    default n
+    depends on W33_UART
+
+if !BOARD_DYNAMIC_ALLOC
+config W33_PACKET_BUFF_MAX
+    int "Static buffer size."
+    range 400 6000
+    default 5000
+endif

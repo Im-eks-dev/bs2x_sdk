@@ -1,0 +1,95 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+choice
+    prompt "Select SLE MOUSE type"
+    default SAMPLE_SUPPORT_SLE_MOUSE
+    config SAMPLE_SUPPORT_SLE_MOUSE
+        bool "Enable SLE MOUSE sample."
+        select SPI_SUPPORT_LPC if SAMPLE_SUPPORT_SLE_MOUSE
+        if SAMPLE_SUPPORT_SLE_MOUSE
+            osource "application/samples/products/sle_mouse_with_dongle/mouse_sensor/Kconfig"
+        endif
+    config SAMPLE_SUPPORT_SLE_MOUSE_DONGLE
+        bool "Enable SLE MOUSE Dongle sample."
+        select DRIVERS_USB_DFU_GADGET
+        select DRIVERS_USB_DFU_DOWNLOAD_CALLBACK
+
+endchoice
+
+if SAMPLE_SUPPORT_SLE_MOUSE_DONGLE
+choice
+prompt "Select SLE dongle report rate, limit by hardware"
+default SAMPLE_SLE_DONGLE_1K_IRQ
+config SAMPLE_SLE_DONGLE_125HZ_IRQ
+    bool "Sle dongle report rate 125hz by irq"
+config SAMPLE_SLE_DONGLE_125HZ_USB
+    bool "Sle dongle report rate 125hz by usb"
+config SAMPLE_SLE_DONGLE_250HZ_IRQ
+    bool "Sle dongle report rate 250hz by irq"
+config SAMPLE_SLE_DONGLE_250HZ_USB
+    bool "Sle dongle report rate 250hz by usb"
+config SAMPLE_SLE_DONGLE_500HZ_IRQ
+    bool "Sle dongle report rate 500hz by irq"
+config SAMPLE_SLE_DONGLE_500HZ_USB
+    bool "Sle dongle report rate 500hz by usb"
+config SAMPLE_SLE_DONGLE_1K_IRQ
+    bool "Sle dongle report rate 1K by irq"
+config SAMPLE_SLE_DONGLE_1K_USB
+    bool "Sle dongle report rate 1K by usb"
+config SAMPLE_SLE_DONGLE_2K_IRQ
+    bool "Sle dongle report rate 2K by irq"
+config SAMPLE_SLE_DONGLE_2K_USB
+    bool "Sle dongle report rate 2K by usb"
+config SAMPLE_SLE_DONGLE_4K_IRQ
+    bool "Sle dongle report rate 4K by irq"
+config SAMPLE_SLE_DONGLE_4K_USB
+    bool "Sle dongle report rate 4K by usb"
+config SAMPLE_SLE_DONGLE_8K
+    bool "Sle dongle report rate 8K"
+endchoice
+
+choice
+    prompt "Select the flash driver to upgrade by dfu"
+    default SAMPLE_USB_MOUSE_DFU_USE_EMBED_FLASH if DRIVER_SUPPORT_EFLASH
+    default SAMPLE_USB_MOUSE_DFU_USE_SFC if DRIVER_SUPPORT_SFC
+    default SAMPLE_USB_MOUSE_DFU_USE_EXTERN_FLASH if DRIVER_SUPPORT_FLASH
+    config SAMPLE_USB_MOUSE_DFU_USE_EMBED_FLASH
+        bool "Download by embed flash"
+        depends on DRIVER_SUPPORT_EFLASH
+    config SAMPLE_USB_MOUSE_DFU_USE_EXTERN_FLASH
+        bool "Download by extern flash"
+        depends on DRIVER_SUPPORT_FLASH
+    config SAMPLE_USB_MOUSE_DFU_USE_SFC
+        bool "Download by sfc"
+        depends on DRIVER_SUPPORT_SFC
+endchoice
+endif
+
+menu "Select SLE MOUSE protocol"
+    config SUPPORT_SLE_PERIPHERAL
+        bool
+        prompt "Select sle peripheral"
+        default y
+        depends on SAMPLE_SUPPORT_SLE_MOUSE
+
+    config SUPPORT_SLE_CENTRAL
+        bool
+        prompt "Select sle central"
+        default n
+        depends on SAMPLE_SUPPORT_SLE_MOUSE_DONGLE
+endmenu
+
+config AUTO_SENSOR_DATA
+    bool
+    prompt "Auto send sle mouse sensor data"
+    default n
+    depends on SAMPLE_SUPPORT_SLE_MOUSE
+
+config SAMPLE_SUPPORT_USB_FULL_SPEED
+    bool
+    prompt "use usb full speed mode"
+    default n
+    depends on SAMPLE_SUPPORT_SLE_MOUSE_DONGLE

@@ -1,0 +1,239 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2022-2022. All rights reserved.
+#===============================================================================
+config UART_BAUD_RATE_DIV_8
+    bool
+    prompt "UART Baud rate div 8"
+    default y
+    depends on DRIVER_SUPPORT_UART
+
+config UART_SUPPORT_TX
+    bool
+    prompt "UART Support TX"
+    default y
+    depends on DRIVER_SUPPORT_UART
+
+config UART_SUPPORT_TX_INT
+    bool
+    prompt "UART Support TX interriupt mode"
+    default y
+    depends on DRIVER_SUPPORT_UART
+
+config UART_SUPPORT_RX
+    bool
+    prompt "UART Support RX"
+    default y
+    depends on DRIVER_SUPPORT_UART
+
+config SUPPORT_UART_POLL_TIMEOUT
+    bool
+    prompt "add timeout in uart poll mode."
+    default n
+    depends on UART_SUPPORT_RX
+
+config UART_READ_MAX_TIMEOUT
+    int
+    prompt "UART read timeout value."
+    default 1000000
+    depends on SUPPORT_UART_POLL_TIMEOUT
+
+config UART_SUPPORT_DMA
+    bool
+    prompt "UART Support dma"
+    default y
+    depends on DRIVER_SUPPORT_UART
+    select DRIVER_SUPPORT_DMA
+
+config UART_SUPPORT_SEND_IN_DMA_ISR
+    bool
+    prompt "UART Support send in dma isr"
+    default n
+    depends on DRIVER_SUPPORT_DMA
+
+config UART_SUPPORT_INT_TRIGGER_DMA
+    bool
+    prompt "UART Support rx interrupt trigger dma"
+    default y
+    depends on UART_SUPPORT_DMA
+
+config UART_SUPPORT_DMA_LLI
+    bool
+    prompt "UART Support DMA lli transport."
+    default n
+    depends on UART_SUPPORT_DMA
+
+config UART_LLI_BAUDRATE
+    int
+    prompt "UART LLI BAUDRATE. Depends on hardware constraints."
+    range 115200 4000000
+    default 115200
+    depends on UART_SUPPORT_DMA_LLI
+
+config UART_DMA_LLI_MAX_MEMBER
+    int
+    prompt "Max lli member number."
+    default 6
+    range 1 12
+    depends on UART_SUPPORT_DMA_LLI
+
+config UART_TX_DMA_NEED_HEADER
+    bool
+    prompt "Whether DMA TX need send head or not."
+    default y
+    depends on UART_SUPPORT_DMA_LLI
+
+config UART_RX_DMA_NEED_HEADER
+    bool
+    prompt "Whether DMA RX need send head or not."
+    default y
+    depends on UART_SUPPORT_DMA_LLI
+
+config UART_SUPPORT_FLOW_CTRL
+    bool
+    prompt "UART Support flow control"
+    default n
+    depends on DRIVER_SUPPORT_UART
+
+config UART_SUPPORT_HW_FLOW_CTRL
+    bool
+    prompt "UART Support hardware flow control"
+    default n
+    depends on UART_SUPPORT_FLOW_CTRL
+
+config UART_SUPPORT_SW_FLOW_CTRL
+    bool
+    prompt "UART Support software flow control"
+    default n
+    depends on UART_SUPPORT_FLOW_CTRL
+
+config UART_SUPPORT_LPM
+    bool
+    prompt "UART Support low power mode, supend and reusme"
+    default y
+    depends on DRIVER_SUPPORT_UART
+
+config UART_FIFO_DEPTH
+    int
+    prompt "UART_FIFO_DEPTH"
+    range 64 128
+    default 64
+    depends on DRIVER_SUPPORT_UART
+
+config UART_SUPPORT_LPC
+    bool
+    prompt "UART Support low power control, control power and clock"
+    default n
+    depends on DRIVER_SUPPORT_UART
+
+config UART_MULTI_CORE_RESUME
+    bool
+    prompt "UART Support low power resume skip some port for multi-core"
+    default n
+    depends on UART_SUPPORT_LPM
+
+
+config UART_NOT_SUPPORT_RX_CONDITON_SIZE_OPTIMIZE
+    bool
+    prompt "UART don't support rx condition size optimization"
+    default n
+    depends on UART_SUPPORT_RX
+
+config UART_SUPPORT_QUERY_REGS
+    bool
+    prompt "UART support query regs values"
+    default n
+    depends on DRIVER_SUPPORT_UART
+
+config UART_L0_TX_PIN
+    int
+    prompt "UART config uart l0 tx pin"
+    default 19
+    depends on DRIVER_SUPPORT_UART
+
+config UART_LOG_WRITE_WITH_NOLOCK
+    bool
+    prompt "UART support write logs with nolock."
+    default y
+    depends on DRIVER_SUPPORT_UART
+
+config UART_L0_RX_PIN
+    int
+    prompt "UART config uart l0 rx pin"
+    default 20
+    depends on DRIVER_SUPPORT_UART
+
+config UART_L0_CTS_PIN
+    int
+    prompt "UART config uart L0 cts pin, which is not used by default."
+    default 100
+    depends on UART_SUPPORT_FLOW_CTRL
+
+config UART_L0_RTS_PIN
+    int
+    prompt "UART config uart L0 rts pin, which is not used by default."
+    default 100
+    depends on UART_SUPPORT_FLOW_CTRL
+
+config UART_H0_TX_PIN
+    int
+    prompt "UART config uart h0 tx pin"
+    default 17
+    depends on DRIVER_SUPPORT_UART
+
+config UART_H0_RX_PIN
+    int
+    prompt "UART config uart h0 rx pin"
+    default 18
+    depends on DRIVER_SUPPORT_UART
+
+config UART_H0_CTS_PIN
+    int
+    prompt "UART config uart h0 cts pin, which is not used by default"
+    default 100
+    depends on UART_SUPPORT_FLOW_CTRL
+
+config UART_H0_RTS_PIN
+    int
+    prompt "UART config uart h0 rts pin, which is not used by default"
+    default 100
+    depends on UART_SUPPORT_FLOW_CTRL
+
+config UART_L1_CTS_PIN
+    int
+    prompt "UART config uart L1 cts pin, which is not used by default."
+    default 100
+    depends on UART_SUPPORT_FLOW_CTRL
+
+config UART_L1_RTS_PIN
+    int
+    prompt "UART config uart L1 rts pin, which is not used by default."
+    default 100
+    depends on UART_SUPPORT_FLOW_CTRL
+
+config UART_SUPPORT_RECV_RAW_DATA
+    bool
+    prompt "UART support receive raw data"
+    default n
+    depends on UART_SUPPORT_DMA_LLI
+
+config UART_FIFO_INT_RX_LEVEL
+    int
+    prompt "UART fifo int rx level"
+    range 0 4
+    default 2
+    depends on UART_SUPPORT_DMA_LLI
+
+config DMA_WAIT_UART_IDLE_INT_LEN
+    int
+    prompt "UART DMA reveive max length."
+    range 0 4096
+    default 1024
+    depends on UART_SUPPORT_RECV_RAW_DATA
+
+config UART_IDLE_PAYLOAD_LEN
+    int
+    prompt "UART IDLE reveive max length."
+    range 0 256
+    default 64
+    depends on UART_SUPPORT_RECV_RAW_DATA

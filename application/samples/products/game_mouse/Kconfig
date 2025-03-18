@@ -1,0 +1,32 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+config SAMPLE_OF_GAME_MOUSE_WITH_DONGLE
+    bool
+    prompt "Support Game mouse with dongle Sample."
+    default n
+    depends on TURNKEY_ENABLE
+    help
+        This option means support game mouse with dongle Sample.
+
+if SAMPLE_OF_GAME_MOUSE_WITH_DONGLE
+menu "Game mouse with dongle Sample Configuration"
+    osource "application/samples/products/game_mouse/game_mouse_with_dongle/Kconfig"
+endmenu
+
+endif
+
+config SAMPLE_OF_GAME_MOUSE_WITH_TEST
+    bool
+    prompt "Support Game mouse with TEST Sample."
+    default n
+    depends on TURNKEY_ENABLE
+    help
+        This option means support game mouse with test Sample.
+
+if SAMPLE_OF_GAME_MOUSE_WITH_TEST
+menu "Game mouse with dongle Sample Configuration"
+    osource "application/samples/products/game_mouse/game_mouse_with_test/Kconfig"
+endmenu
+endif

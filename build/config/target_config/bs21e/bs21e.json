@@ -1,0 +1,305 @@
+{
+    "chipName": "bs21e",
+    "seriesName": "cfbb",
+    "board": "bs21e",
+    "compile": {
+        "custom_build_command": "standard-bs21e-1100e",
+        "tool_chain": [
+            "cc_riscv32_musl_fp_win"
+        ],
+        "map_path": "./output/bs21e/acore/standard-bs21e-1100e/application.map"
+    },
+    "debug": {
+        "elf_path": "./output/bs21e/acore/standard-bs21e-1100e/application.elf",
+        "breakpoints_limitation": "7",
+        "stop_debug_state": "restart",
+        "client": [
+            "gdb"
+        ],
+        "tool": [
+            "jlink"
+        ],
+        "params": [
+            {
+                "name": "jlink",
+                "param": {
+                    "interface": [
+                        "swd",
+                        "jtag"
+                    ],
+                    "speed": "5000",
+                    "port": "3333"
+                }
+            }
+        ],
+        "timeout_list": [
+            "15000",
+            "30000",
+            "60000",
+            "120000",
+            "-1"
+        ],
+        "timeout_default": "60000"
+    },
+    "upload": {
+        "bin_path": "./tools/pkg/fwpkg/bs21e/bs21e_all.fwpkg",
+        "reset": 1,
+        "burn_verification": 0,
+        "protocol": [
+            "serial",
+            "usb"
+        ],
+        "baudList": [
+            "2400",
+            "4800",
+            "9600",
+            "19200",
+            "38400",
+            "57600",
+            "115200",
+            "230400",
+            "460800",
+            "500000",
+            "750000",
+            "921600",
+            "2000000"
+        ],
+        "params": [
+            {
+                "name": "serial",
+                "param": {
+                    "port": "",
+                    "baud": "750000",
+                    "stop_bit": "0",
+                    "parity": "N",
+                    "inside_protocol": ""
+                }
+            },
+            {
+                "name": "usb",
+                "param": {
+                    "usbValueList": "",
+                    "stop_bit": "0",
+                    "parity": "N",
+                    "inside_protocol": ""
+                }
+            }
+        ]
+    },
+    "console": {
+        "serial_port": "",
+        "baud": "115200",
+        "stop_bit": "0",
+        "parity": "N"
+    },
+    "need_sdk": true,
+    "need_project_path": true,
+    "chip_config": false,
+    "gui": false,
+    "platform": "cfbb",
+    "project_type": [
+        {
+            "name": "cfbb",
+            "base_on_sdk": true
+        }
+    ],
+    "analysis": {
+        "elf_path": "./output/bs21e/acore/standard-bs21e-1100e/application.elf",
+        "map_path": "./output/bs21e/acore/standard-bs21e-1100e/application.map",
+        "tool_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_fp_win/bin"
+    },
+    "kConfig": {
+        "menu_config_file_path": "config.in",
+        "menu_config_build_target": "standard-bs21e-1100e",
+        "menu_config_core": "acore",
+        "menu_config_target_path": "./build/config/target_config/bs21e/menuconfig/acore"
+    },
+    "variabletrace": "false",
+    "config_script": "build/config/target_config/bs21e/config.py",
+    "menuconfig": "build/config/target_config/bs21e/menuconfig/acore/standard_bs21e_1100e.config",
+    "sign_config": "build/config/target_config/bs21e/sign_config/standard_bs21e_1100e.cfg",
+    "partition": "build/config/target_config/bs21e/flash_sector_config",
+    "nv": "middleware/chips/bs21e/nv/nv_config",
+    "flash_boot": "interim_binary/bs21e/bin/boot_bin",
+    "loader_boot": "interim_binary/bs21e/bin/boot_bin",
+    "liteos_kconfig": "kernel/liteos/liteos_v208.6.0_b017/Huawei_LiteOS/tools/build/config",
+    "liteos_script": "kernel/liteos/liteos_v208.6.0_b017/show_menuconfig.py",
+    "target_default": "BS21-N1100E-STANDARD",
+    "target_preset": [
+        "standard-bs21e-1100e",
+        "bs21e-1100e-rcu",
+        "bs21e-1100e-slp"
+    ],
+    "target": {
+        "BS21-N1100E": {
+            "BS21-N1100E-STANDARD": {
+                "cmake": {
+                    "support_task": [
+                        "build",
+                        "clean",
+                        "rebuild",
+                        "upload",
+                        "stack analysis",
+                        "image analysis",
+                        "kconfig"
+                    ],
+                    "build": {
+                        "build_command": "./build.py",
+                        "build_argv": "standard-bs21e-1100e",
+                        "custom_build_command": {
+                            "standard-bs21e-1100e": {
+                                "build_command": "./build.py",
+                                "build_argv": "standard-bs21e-1100e"
+                            }
+                        }
+                    },
+                    "stack analysis": {
+                        "analysis_elf_path": "./output/bs21e/acore/standard-bs21e-1100e/application.elf",
+                        "analysis_compiler_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_fp_win/bin",
+                        "build_config_path": ""
+                    },
+                    "image analysis": {
+                        "analysis_elf_path": "./output/bs21e/acore/standard-bs21e-1100e/application.elf",
+                        "analysis_map_path": "./output/bs21e/acore/standard-bs21e-1100e/application.map",
+                        "analysis_compiler_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_fp_win/bin",
+                        "build_config_path": ""
+                    },
+                    "upload": {
+                        "upload_speed": "750000",
+                        "upload_partitions": "./tools/pkg/fwpkg/bs21e/bs21e_all.fwpkg",
+                        "upload_protocol": ""
+                    },
+                    "debug": {
+                        "debug_client": "gdb",
+                        "debug_tool": "jlink",
+                        "debug_interface": "swd",
+                        "debug_device": "CPU CORE|RISC-V|RISC-V",
+                        "debug_elf": "./output/bs21e/acore/standard-bs21e-1100e/application.elf"
+                    },
+                    "kconfig": {
+                        "menu_config_file_path": "./config.in",
+                        "menu_config_build_target": "standard-bs21e-1100e",
+                        "menu_config_core": "acore",
+                        "menu_config_target_path": "./build/config/target_config/bs21e/menuconfig/acore"
+                    },
+                    "chip config": {
+                        "series_name": "bs21e",
+                        "board_build.mcu": "bs21e"
+                    }
+                }
+            },
+            "BS21-N1100E-RCU": {
+                "cmake": {
+                    "support_task": [
+                        "build",
+                        "clean",
+                        "rebuild",
+                        "upload",
+                        "stack analysis",
+                        "image analysis",
+                        "kconfig"
+                    ],
+                    "build": {
+                        "build_command": "./build.py",
+                        "build_argv": "bs21e-1100e-rcu",
+                        "custom_build_command": {
+                            "bs21e-1100e-rcu": {
+                                "build_command": "./build.py",
+                                "build_argv": "bs21e-1100e-rcu"
+                            }
+                        }
+                    },
+                    "stack analysis": {
+                        "analysis_elf_path": "./output/bs21e/acore/bs21e-1100e-rcu/application.elf",
+                        "analysis_compiler_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_fp_win/bin",
+                        "build_config_path": ""
+                    },
+                    "image analysis": {
+                        "analysis_elf_path": "./output/bs21e/acore/bs21e-1100e-rcu/application.elf",
+                        "analysis_map_path": "./output/bs21e/acore/bs21e-1100e-rcu/application.map",
+                        "analysis_compiler_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_fp_win/bin",
+                        "build_config_path": ""
+                    },
+                    "upload": {
+                        "upload_speed": "750000",
+                        "upload_partitions": "./tools/pkg/fwpkg/bs21e/bs21e_all.fwpkg",
+                        "upload_protocol": ""
+                    },
+                    "debug": {
+                        "debug_client": "gdb",
+                        "debug_tool": "jlink",
+                        "debug_interface": "swd",
+                        "debug_device": "CPU CORE|RISC-V|RISC-V",
+                        "debug_elf": "./output/bs21e/acore/bs21e-1100e-rcu/application.elf"
+                    },
+                    "kconfig": {
+                        "menu_config_file_path": "./config.in",
+                        "menu_config_build_target": "bs21e-1100e-rcu",
+                        "menu_config_core": "acore",
+                        "menu_config_target_path": "./build/config/target_config/bs21e/menuconfig/acore"
+                    },
+                    "chip config": {
+                        "series_name": "bs21e",
+                        "board_build.mcu": "bs21e"
+                    }
+                }
+            },
+            "BS21-N1100E-SLP-RCU": {
+                "cmake": {
+                    "support_task": [
+                        "build",
+                        "clean",
+                        "rebuild",
+                        "upload",
+                        "stack analysis",
+                        "image analysis",
+                        "kconfig"
+                    ],
+                    "build": {
+                        "build_command": "./build.py",
+                        "build_argv": "bs21e-1100e-slp",
+                        "custom_build_command": {
+                            "bs21e-1100e-slp": {
+                                "build_command": "./build.py",
+                                "build_argv": "bs21e-1100e-slp"
+                            }
+                        }
+                    },
+                    "stack analysis": {
+                        "analysis_elf_path": "./output/bs21e/acore/bs21e-1100e-slp/application.elf",
+                        "analysis_compiler_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_fp_win/bin",
+                        "build_config_path": ""
+                    },
+                    "image analysis": {
+                        "analysis_elf_path": "./output/bs21e/acore/bs21e-1100e-slp/application.elf",
+                        "analysis_map_path": "./output/bs21e/acore/bs21e-1100e-slp/application.map",
+                        "analysis_compiler_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_fp_win/bin",
+                        "build_config_path": ""
+                    },
+                    "upload": {
+                        "upload_speed": "750000",
+                        "upload_partitions": "./tools/pkg/fwpkg/bs21e/bs21e_all.fwpkg",
+                        "upload_protocol": ""
+                    },
+                    "debug": {
+                        "debug_client": "gdb",
+                        "debug_tool": "jlink",
+                        "debug_interface": "swd",
+                        "debug_device": "CPU CORE|RISC-V|RISC-V",
+                        "debug_elf": "./output/bs21e/acore/bs21e-1100e-slp/application.elf"
+                    },
+                    "kconfig": {
+                        "menu_config_file_path": "./config.in",
+                        "menu_config_build_target": "bs21e-1100e-slp",
+                        "menu_config_core": "acore",
+                        "menu_config_target_path": "./build/config/target_config/bs21e/menuconfig/acore"
+                    },
+                    "chip config": {
+                        "series_name": "bs21e",
+                        "board_build.mcu": "bs21e"
+                    }
+                }
+            }
+        }
+    }
+}

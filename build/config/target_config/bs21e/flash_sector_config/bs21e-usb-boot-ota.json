@@ -1,0 +1,57 @@
+{
+   "Partition_Tbl":{
+      "image_id" : "0x4B87A52D",
+      "stru_ver" : "0x00010000",
+      "version"  : "0x00000000",
+      "param_info_description" : [
+         "Address Constraints: flash type must fill with relative address, RAM regions must fill with absolute address.",
+         "Item ID Constraints: ssb type:                       0x00 ~ 0x0F, Relative address, Size",
+         "                     root public key and signature:  0x10 ~ 0x1F, Relative address, Size",
+         "                     firmware on flash:              0x20 ~ 0x2F, Relative address, Size",
+         "                     data on flash:                  0x30 ~ 0x3F, Relative address, Size",
+
+         "Fixed item id:  0x00: flashboot",
+         "                0x01: flashboot_backup",
+         "                0x23: acpu_image",
+         "                0x25: nv data",
+         "                0x26: fota data",
+         "                0x29: vid:16-31bit pid:0-15bit, ",
+         "                      default wait time: 24-31bit, Unit: 20 ms",
+         "                      io detected wait time:    16-23bit, Unit: 20 ms",
+         "                      io1 detect enable: 15bit,    enable io1 detect",
+         "                      io1 detect levle:  14bit,    io1 valid level",
+         "                      io1 pin num:       8-13bit,  io1 pin num",
+         "                      io2 detect enable: 7bit,     enable io2 detect",
+         "                      io2 detect levle:  6bit,     io2 valid level",
+         "                      io2 pin num:       0-5bit,   io2 pin num",
+         "                      The following 0x29 configurations are explained: vid is 0x1111, pid is 0xff04",
+         "                      default wait time is 0x0 * 20 = 0ms",
+         "                      io detected wait time is 0x19 * 20 = 500ms",
+         "                      io1 no detect",
+         "                      io2 detect, if io2 detect level is high, it will wait 500ms"
+      ],
+      "param_info" : [
+         ["0x00", "0x00001000", "0x0000D000"],
+         ["0x01", "0x0000E000", "0x0000D000"],
+         ["0x23", "0x0001B000", "0x00082000"],
+         ["0x25", "0x000FE000", "0x00002000"],
+         ["0x26", "0x0009D000", "0x00061000"],
+         ["0x27", "0x00000000", "0x00000000"],
+         ["0x28", "0x00000000", "0x00000000"],
+         ["0x29", "0x1111ff04", "0x19190000"],
+         ["0x30", "0x00010a0b", "0x00000000"],
+         ["0x31", "0x00000000", "0x00000000"],
+         ["0x32", "0x00000000", "0x00000000"],
+         ["0x33", "0x00000000", "0x00000000"]
+      ]
+   },
+   "Output_file_prefix":"AIoT",
+   "Use_defines" : true,
+   "Partition_defines" : [
+      ["0x00", "FLASHBOOT_A_IMAGE_OFFSET", "FLASHBOOT_A_IMAGE_LEN"],
+      ["0x01", "FLASHBOOT_B_IMAGE_OFFSET", "FLASHBOOT_B_IMAGE_LEN"],
+      ["0x23", "APPLICATION_IMAGE_OFFSET", "APPLICATION_IMAGE_LEN"],
+      ["0x25", "NV_IMAGE_OFFSET",          "NV_IMAGE_LEN"],
+      ["0x26", "FOTA_IMAGE_OFFSET",        "FOTA_IMAGE_LEN"]
+   ]
+}

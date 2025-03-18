@@ -1,0 +1,20 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+config HADC_SELF_CALIBRATION
+    bool
+    prompt "HADC calibration, or use record code."
+    default y
+    depends on ADC_USING_V152
+
+config HADC_SAMPLE
+    bool
+    prompt "Enable HADC sample."
+    default y
+    depends on ADC_USING_V152
+
+config TIMING_SAMPLE
+    bool
+    prompt "Create timing sample irq."
+    default n

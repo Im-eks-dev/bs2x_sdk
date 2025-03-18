@@ -1,0 +1,32 @@
+menu "Misc"
+    config FILE_BY_ARRAY
+        bool "Use array file."
+        default y
+
+    config OSAL_DEFINED
+        bool "Osal has been defined."
+        default n
+
+    config LIBBOUNDSCHECK_IMPLEMENTED
+        bool "Libboundscheck already implemented."
+        default n
+
+    config BOARD_DYNAMIC_ALLOC
+        bool "Board has dynamic memory alloc"
+        default y
+endmenu
+
+menu "Firmware Load"
+    comment "Firmware load module."
+    rsource "fw_load/Kconfig"
+endmenu
+
+menu "Power Management"
+    comment "Power management module."
+    rsource "pm/Kconfig"
+endmenu
+
+menu "Transfer"
+    comment "Transfer module."
+    rsource "transfer/Kconfig"
+endmenu

@@ -1,0 +1,186 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2024-2024. All rights reserved.
+#===============================================================================
+config SLE_MTU_LENGTH
+    int
+    prompt "Set the length of mtu."
+    default 300
+    help
+        This option means the length of mtu.
+
+config SLE_MULTICON_NUM
+    int
+    prompt "Set the num of sle multicon."
+    range 1 2
+    default 1
+    help
+        This option means the num of sle multicon.
+
+if SLE_MULTICON_NUM = 1
+    config SLE_MULTICON_SERVER1_ADDR0
+        hex
+        default 0x0A
+        prompt "Set the target sle server1 addr[0] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR1
+        hex
+        default 0x01
+        prompt "Set the target sle server1 addr[1] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR2
+        hex
+        default 0x02
+        prompt "Set the target sle server1 addr[2] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR3
+        hex
+        default 0x03
+        prompt "Set the target sle server1 addr[3] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR4
+        hex
+        default 0x04
+        prompt "Set the target sle server1 addr[4] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR5
+        hex
+        default 0x05
+        prompt "Set the target sle server1 addr[5] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+endif
+
+if SLE_MULTICON_NUM = 2
+    config SLE_EXSIT_TWO_MULTICON_SERVER
+        int
+        default 1
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+    config SLE_MULTICON_SERVER1_ADDR0
+        hex
+        default 0x0A
+        prompt "Set the target sle server1 addr[0] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR1
+        hex
+        default 0x01
+        prompt "Set the target sle server1 addr[1] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR2
+        hex
+        default 0x02
+        prompt "Set the target sle server1 addr[2] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR3
+        hex
+        default 0x03
+        prompt "Set the target sle server1 addr[3] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR4
+        hex
+        default 0x04
+        prompt "Set the target sle server1 addr[4] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER1_ADDR5
+        hex
+        default 0x05
+        prompt "Set the target sle server1 addr[5] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+
+    config SLE_MULTICON_SERVER2_ADDR0
+        hex
+        default 0x0B
+        prompt "Set the target sle server2 addr[0] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER2_ADDR1
+        hex
+        default 0x01
+        prompt "Set the target sle server2 addr[1] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER2_ADDR2
+        hex
+        default 0x02
+        prompt "Set the target sle server2 addr[2] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER2_ADDR3
+        hex
+        default 0x03
+        prompt "Set the target sle server2 addr[3] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER2_ADDR4
+        hex
+        default 0x04
+        prompt "Set the target sle server2 addr[4] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+    config SLE_MULTICON_SERVER2_ADDR5
+        hex
+        default 0x05
+        prompt "Set the target sle server2 addr[5] of wanting to connect."
+        depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+        help
+            This option means the addr of tartget server wanting to connect.
+endif
+
+config SLE_MULTICON_CLIENT_ADDR0
+    hex
+    default 0x0B
+    prompt "Set the sle client addr[0]."
+    depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+config SLE_MULTICON_CLIENT_ADDR1
+    hex
+    default 0x01
+    prompt "Set the sle client addr[1]."
+    depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+config SLE_MULTICON_CLIENT_ADDR2
+    hex
+    default 0x02
+    prompt "Set the sle client addr[2]."
+    depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+config SLE_MULTICON_CLIENT_ADDR3
+    hex
+    default 0x03
+    prompt "Set the sle client addr[3]."
+    depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+config SLE_MULTICON_CLIENT_ADDR4
+    hex
+    default 0x04
+    prompt "Set the sle client addr[4]."
+    depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE
+config SLE_MULTICON_CLIENT_ADDR5
+    hex
+    default 0x05
+    prompt "Set the sle client addr[5]."
+    depends on SAMPLE_SUPPORT_SLE_OTA_DONGLE

@@ -1,0 +1,11 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2024-2024. All rights reserved.
+#===============================================================================
+choice
+    prompt "Choose Porting"
+    config TIOT_PORTING_AIR_MOUSE
+        bool "air_mouse"
+    config TIOT_PORTING_BSXX_BRIDGE
+        bool "bsxx_bridge"
+endchoice

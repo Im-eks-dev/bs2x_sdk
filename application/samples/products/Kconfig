@@ -1,0 +1,290 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+config ENABLE_ALL_PRODUCTS_SAMPLE
+    bool
+    prompt "Enable all the sample of product, it's just for build."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    select SAMPLE_SUPPORT_AIR_MOUSE_WITH_DONGLE
+    select SAMPLE_SUPPORT_BLE_KEYBOARD
+    select SAMPLE_SUPPORT_BLE_MOUSE
+    select SAMPLE_SUPPORT_BLE_SLE_TAG
+    select SAMPLE_SUPPORT_BLE_UART
+    select SAMPLE_SUPPORT_RCU
+    select SAMPLE_SUPPORT_SLE_OTA_DONGLE
+    select SAMPLE_SUPPORT_SLE_MULTI_CONN
+    select SAMPLE_SUPPORT_SLE_MEASURE_DIS
+    select SAMPLE_SUPPORT_SLE_MICROPHONE
+    select SAMPLE_SUPPORT_SLE_MOUSE_WITH_DONGLE
+    select SAMPLE_SUPPORT_SLE_UART
+    select SAMPLE_SUPPORT_SLE_UART_DMA
+    select SAMPLE_SUPPORT_USB_KEYBOARD
+    select SAMPLE_SUPPORT_USB_MOUSE
+    select SAMPLE_SUPPORT_LOWPOWER
+    help
+        This option means enable all the sample of product, it is just for build.
+
+config TURNKEY_ENABLE
+    bool
+    prompt "Enable Turnkey."
+    default n
+    help
+        This option means support Turnkey.
+
+if TURNKEY_ENABLE
+choice
+    prompt "Select mouse turnkey mode"
+    default MOUSE_8K_TURNKEY
+    config MOUSE_8K_TURNKEY
+        bool "Select mouse 8k turnkey."
+    config MOUSE_2K_TURNKEY
+        bool "Select mouse 2k turnkey."
+endchoice
+osource "application/samples/products/game_mouse/Kconfig"
+endif
+
+config SAMPLE_SUPPORT_AIR_MOUSE_WITH_DONGLE
+    bool
+    prompt "Support air mouse sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support Air Mouse Sample.
+
+if SAMPLE_SUPPORT_AIR_MOUSE_WITH_DONGLE
+menu "Air Mouse sample Configuration"
+    osource "application/samples/products/air_mouse/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_BLE_KEYBOARD
+    bool
+    prompt "Support BLE Keyboard sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support BLE Keyboard Sample.
+
+config SAMPLE_SUPPORT_BLE_MOUSE
+    bool
+    prompt "Support BLE Mouse sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support BLE Mouse Sample.
+
+if SAMPLE_SUPPORT_BLE_MOUSE
+    osource "application/samples/products/ble_mouse/mouse_sensor/Kconfig"
+endif
+
+config SAMPLE_SUPPORT_BLE_SLE_TAG
+    bool
+    prompt "Support Ble Sle tag sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support SLE Mouse Sample.
+
+config SAMPLE_SUPPORT_BLE_UART
+    bool
+    prompt "Support BLE UART sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support BLE UART Sample.
+
+if SAMPLE_SUPPORT_BLE_UART
+menu "BLE UART Sample Configuration"
+    osource "application/samples/products/ble_uart/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_RCU
+    bool
+    prompt "Support RCU sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support RCU Sample.
+
+if SAMPLE_SUPPORT_RCU
+menu "rcu Sample Configuration"
+    osource "application/samples/products/rcu/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_SLE_OTA_DONGLE
+    bool
+    prompt "Support sle ota dongle sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support sle ota dongle Sample.
+
+if SAMPLE_SUPPORT_SLE_OTA_DONGLE
+menu "sle ota dongle Sample Configuration"
+    osource "application/samples/products/sle_ota_dongle/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_SLE_MULTI_CONN
+    bool
+    prompt "Support SLE Multi Connections sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support SLE Multi Connections Sample.
+if SAMPLE_SUPPORT_SLE_MULTI_CONN
+menu "SLE Multi Connections Sample Configuration"
+    osource "application/samples/products/sle_multi_conn/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_SLE_KEYBOARD_WITH_DONGLE
+    bool
+    prompt "Support SLE KEYBOARD With Dongle sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support SLE KEYBOARD Sample.
+
+if SAMPLE_SUPPORT_SLE_KEYBOARD_WITH_DONGLE
+menu "SLE KeyBoard With Dongle Sample Configuration"
+    osource "application/samples/products/sle_keyboard_with_dongle/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_SLE_MICROPHONE
+    bool
+    prompt "Support SLE Microphone sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support SLE Microphone Sample.
+
+if SAMPLE_SUPPORT_SLE_MICROPHONE
+menu "SLE Microphone sample Configuration"
+    osource "application/samples/products/sle_microphone/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_SLE_MOUSE_WITH_DONGLE
+    bool
+    prompt "Support SLE Mouse With Dongle sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support SLE Mouse Sample.
+
+if SAMPLE_SUPPORT_SLE_MOUSE_WITH_DONGLE
+menu "SLE Mouse With Dongle Sample Configuration"
+    osource "application/samples/products/sle_mouse_with_dongle/Kconfig"
+endmenu
+endif
+
+if ENABLE_PRODUCTS_SAMPLE &&(SAMPLE_SUPPORT_BLE_MOUSE || SAMPLE_SUPPORT_USB_MOUSE || SAMPLE_SUPPORT_SLE_MOUSE_WITH_DONGLE)
+menu "Mouse VBAT CH Configuration"
+config MOUSE_ADC_VBAT_CH
+    int
+    prompt "Mouse VBAT measurement channel."
+    default 7
+endmenu
+endif
+
+config SAMPLE_SUPPORT_SLE_UART
+    bool
+    prompt "Support SLE UART sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support SLE UART Sample.
+
+if SAMPLE_SUPPORT_SLE_UART
+menu "SLE UART Sample Configuration"
+    osource "application/samples/products/sle_uart/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_SLE_UART_DMA
+    bool
+    prompt "Support SLE UART DMA sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support SLE UART DMA Sample.
+ 
+if SAMPLE_SUPPORT_SLE_UART_DMA
+menu "SLE UART DMA Sample Configuration"
+    osource "application/samples/products/sle_uart_dma_lli/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_USB_AMIC_VDT
+    bool
+    prompt "Support USB AMIC VOICE sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE && ADC_SUPPORT_AMIC
+    help
+        This option means support USB AMIC VOICE Sample.
+
+if SAMPLE_SUPPORT_USB_AMIC_VDT
+menu "USB AMIC VOICE Sample Configuration"
+    osource "application/samples/products/usb_amic_vdt/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_USB_KEYBOARD
+    bool
+    prompt "Support USB keyboard sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support Keyboard Sample.
+
+config SAMPLE_SUPPORT_USB_MOUSE
+    bool
+    prompt "Support USB mouse sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support USB mouse Sample.
+
+if SAMPLE_SUPPORT_USB_MOUSE
+menu "USB Mouse Sample Configuration"
+    osource "application/samples/products/usb_mouse/Kconfig"
+    osource "application/samples/products/usb_mouse/mouse_sensor/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_SLE_MEASURE_DIS
+    bool
+    prompt "Support SLE Measure Dis sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support SLE MEASURE Dis Sample.
+
+if SAMPLE_SUPPORT_SLE_MEASURE_DIS
+menu "SLE MEASURE Dis Sample Configuration"
+    osource "application/samples/products/sle_measure_dis/Kconfig"
+endmenu
+endif
+
+config SAMPLE_SUPPORT_SLEKEY_NFC
+    bool
+    prompt "Support slekey nfc sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    help
+        This option means support SLE Key SPI-NFC Sample.
+
+config SAMPLE_SUPPORT_LOWPOWER
+    bool
+    prompt "Support lowpower sample."
+    default n
+    depends on ENABLE_PRODUCTS_SAMPLE
+    select PM_SYS_SUPPORT
+    help
+        This option means support lowpower Sample.

@@ -1,0 +1,33 @@
+#===============================================================================
+# @brief    Nfc only sample kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+if HAVE_NFC_POLL
+    comment "NFC poll mode supports NFC RW only sample"
+    depends on ENABLE_NFC_ONLY_SAMPLE
+endif
+
+if HAVE_NFC_LISTEN
+    comment "NFC listen mode supports NFC CE only sample"
+    depends on ENABLE_NFC_ONLY_SAMPLE
+endif
+
+choice NFC_ONLY_SAMPLE
+    prompt "choose nfc only sample"
+    depends on ENABLE_NFC_ONLY_SAMPLE
+    default SAMPLE_SUPPORT_NFC_ONLY_RW
+    config SAMPLE_SUPPORT_NFC_ONLY_RW
+        bool
+        prompt "Enable NFC RW only."
+        depends on HAVE_NFC_POLL
+        help
+            This option means enable NFC RW only sample.
+
+    config SAMPLE_SUPPORT_NFC_ONLY_CE
+        bool
+        prompt "Enable NFC CE only."
+        depends on HAVE_NFC_LISTEN
+        help
+            This option means enable NFC CE only sample.
+endchoice

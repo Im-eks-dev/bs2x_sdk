@@ -1,0 +1,177 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2024. All rights reserved.
+#===============================================================================
+
+choice
+    prompt "Select GAME MOUSE type"
+    default SAMPLE_SUPPORT_GAME_MOUSE
+    config SAMPLE_SUPPORT_GAME_MOUSE
+        bool "Enable GAME MOUSE sample."
+        if SAMPLE_SUPPORT_GAME_MOUSE
+            osource "application/samples/products/game_mouse/game_mouse_with_dongle/mouse_sensor/Kconfig"
+            menu "Select SLE MOUSE protocol"
+            config SUPPORT_SLE_BLE_PERIPHERAL
+                bool "Select sle ble peripheral."
+                depends on SAMPLE_SUPPORT_GAME_MOUSE
+            endmenu
+            menu "Select Feature Macro"
+            choice
+                prompt "Select Mouse Button mode"
+                default SINGLE_BUTTON_MODE
+                config KEY_SCAN_MODE
+                    bool "Select KEY_SCAN_MODE."
+                config SINGLE_BUTTON_MODE
+                    bool "Select SINGLE_BUTTON_MODE."
+            endchoice
+            choice
+                prompt "Select DPI key mode"
+                default DOUBLE_DPI_KEY
+                config SINGLE_DPI_KEY
+                    bool "Select SINGLE_KEY_MODE."
+                config DOUBLE_DPI_KEY
+                    bool "Select DOUBLE_KEY_MODE."
+            endchoice
+            choice
+                prompt "Select SLE/BLE SWITCH MODE"
+                default BSLE_COMBA_KEY_SWITCH
+                config BSLE_BUTTON_SWITCH
+                    bool "Select BSLE_BUTTON_SWITCH."
+                config BSLE_COMBA_KEY_SWITCH
+                    bool "Select BSLE_COMBA_KEY_SWITCH."
+            endchoice
+            choice
+                prompt "Select NV OR FLASH"
+                default STORAGE_BY_NV
+                config STORAGE_BY_FLASH
+                    bool "Select STORAGE_BY_FLASH."
+                config STORAGE_BY_NV
+                    bool "Select STORAGE_BY_NV."
+            endchoice
+            choice
+                prompt "Select upper computer protocol"
+                default ORIGINAL_PROTOCOL
+                config ORIGINAL_PROTOCOL
+                    bool "Select ORIGINAL_PROTOCOL."
+                config EXTENED_PROTOCOL
+                    bool "Select EXTENED_PROTOCOL."
+            endchoice
+            config MOUSE_REPORT_RATE_KEY
+                bool
+                prompt "Contain report rate switch key."
+                default y
+            config MOUSE_MOTION_KEY
+                bool
+                prompt "Contain motion switch key."
+                default y
+            endmenu
+        endif
+    config SAMPLE_SUPPORT_GAME_MOUSE_DONGLE
+        bool "Enable GAME MOUSE Dongle sample."
+        if  SAMPLE_SUPPORT_GAME_MOUSE_DONGLE
+            menu "Select SLE MOUSE protocol"
+            config SUPPORT_SLE_BLE_CENTRAL_DEFAULT
+                bool "Select sle ble central default."
+                depends on SAMPLE_SUPPORT_GAME_MOUSE_DONGLE
+            endmenu
+        endif
+endchoice
+
+menu  "Select Update Config"
+    config DRIVERS_USB_DFU_GADGET
+        bool "Enable USB Dfu Gadget"
+        depends on DRIVERS_USB_GADGET
+
+        config DRIVERS_USB_DFU_DOWNLOAD_CALLBACK
+            bool "Enable USB Dfu Download Callback"
+            default n
+            depends on DRIVERS_USB_DFU_GADGET
+
+    config MIDDLEWARE_SUPPORT_UPDATE
+        bool
+        prompt "Update Config"
+        default n
+        config BT_UPG_ENABLE
+            bool
+            prompt "ENABLE BLE OTA."
+            default n
+            depends on MIDDLEWARE_SUPPORT_UPDATE
+
+        config SLE_UPG_ENABLE
+            bool
+            prompt "ENABLE SLE OTA."
+            default n
+            depends on MIDDLEWARE_SUPPORT_UPDATE
+endmenu
+
+menu "Mouse Pin Configuration"
+    depends on SAMPLE_SUPPORT_GAME_MOUSE
+config MOUSE_PIN_LEFT
+    int
+    prompt "Mouse left key pinnum."
+    default 27
+config MOUSE_PIN_MID
+    int
+    prompt "Mouse middle key pinnum."
+    default 25
+config MOUSE_PIN_RIGHT
+    int
+    prompt "Mouse right key pinnum."
+    default 26
+config MOUSE_PIN_BACKWARD
+    int
+    prompt "Mouse backward key pinnum."
+    default 9
+config MOUSE_PIN_FORWARD
+    int
+    prompt "Mouse forward key pinnum."
+    default 10
+config MOUSE_PIN_DPI_ADD
+    int
+    prompt "Mouse dpi_add key pinnum."
+    default 13
+    depends on DOUBLE_DPI_KEY
+config MOUSE_PIN_DPI_SUB
+    int
+    prompt "Mouse dpi_sub key pinnum."
+    default 10
+    depends on DOUBLE_DPI_KEY
+config MOUSE_PIN_DPI
+    int
+    prompt "Mouse DPI key pinnum."
+    default 6
+    depends on SINGLE_DPI_KEY
+config MOUSE_PIN_REPORT_RATE
+    int
+    prompt "Mouse report_rate key pinnum."
+    default 15
+    depends on MOUSE_REPORT_RATE_KEY
+config MOUSE_PIN_QDEC_A
+    int
+    prompt "Mouse qdec a pinnum."
+    default 29
+config MOUSE_PIN_QDEC_B
+    int
+    prompt "Mouse qdec b pinnum."
+    default 30
+config MOUSE_PIN_MOTION
+    int
+    prompt "Mouse sensor montion pinnum."
+    default 32
+config MOUSE_PIN_SPI_CLK
+    int
+    prompt "Mouse SPI clk pinnum."
+    default 18
+config MOUSE_PIN_SPI_CS
+    int
+    prompt "Mouse SPI cs pinnum."
+    default 17
+config MOUSE_PIN_SPI_MOSI
+    int
+    prompt "Mouse SPI MOSI pinnum."
+    default 16
+config MOUSE_PIN_SPI_MISO
+    int
+    prompt "Mouse SPI MISO pinnum."
+    default 15
+endmenu

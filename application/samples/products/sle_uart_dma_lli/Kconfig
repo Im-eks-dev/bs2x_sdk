@@ -1,0 +1,103 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) HiSilicon (Shanghai) Technologies Co., Ltd. 2024-2024. All rights reserved.
+#===============================================================================
+choice
+    prompt "Choice target UART DMA SLE Sample Mode"
+    default SAMPLE_SUPPORT_SLE_UART_DMA_MASTER_A
+    config SAMPLE_SUPPORT_SLE_UART_DMA_MASTER_A
+        bool
+        prompt "Support UART Master Sample(A)."
+        default y
+        depends on SAMPLE_SUPPORT_SLE_UART_DMA
+        help
+            This option means support UART Master Sample.
+
+    config SAMPLE_SUPPORT_SLE_UART_DMA_MASTER_B
+        bool
+        prompt "Support UART Master Sle Sample(B)."
+        default n
+        depends on SAMPLE_SUPPORT_SLE_UART_DMA
+        help
+            This option means support UART Master Sle Sample.
+
+    config SAMPLE_SUPPORT_SLE_UART_DMA_SLAVE_C
+        bool
+        prompt "Support UART Slave Sle Sample(C)."
+        default n
+        depends on SAMPLE_SUPPORT_SLE_UART_DMA
+        help
+            This option means support UART Slave Sle Sample.
+
+    config SAMPLE_SUPPORT_SLE_UART_DMA_SLAVE_D
+        bool
+        prompt "Support UART Slave Sample(D)."
+        default n
+        depends on SAMPLE_SUPPORT_SLE_UART_DMA
+        help
+            This option means support UART Slave Sample.
+endchoice
+
+menu "Select SLE Config"
+choice
+    prompt "Select Sle Sample Mode"
+    default SAMPLE_SLE_SUPPORT_NORMAL_TYPE
+    config SAMPLE_SLE_SUPPORT_NORMAL_TYPE
+        bool "Enable SLE UART normal sample."
+    config SAMPLE_SLE_SUPPORT_LOW_LATENCY_TYPE
+        bool "Enable SLE UART low latency sample."
+endchoice
+
+choice
+    prompt "Select Sle Rate config"
+    default SAMPLE_SUPPORT_RATE_CONFIG_236B_25MS
+    config SAMPLE_SUPPORT_RATE_CONFIG_236B_25MS
+        bool "Support SLE UART 236B INV=25MS"
+        depends on (SAMPLE_SLE_SUPPORT_NORMAL_TYPE && (SAMPLE_SUPPORT_UART_DMA_LLI_MODE))
+    config SAMPLE_SUPPORT_RATE_CONFIG_236B_2MS
+        bool "Support SLE UART 236B INV=2MS"
+        depends on (SAMPLE_SLE_SUPPORT_NORMAL_TYPE && (SAMPLE_SUPPORT_UART_DMA_LLI_MODE || (SAMPLE_SUPPORT_UART_DMA_RAW_DATA_MODE && !UART_SUPPORT_FLOW_CTRL)))
+    config SAMPLE_SUPPORT_RATE_CONFIG_250B_1K
+        bool "Support SLE UART 250B INV=1K"
+        depends on (SAMPLE_SLE_SUPPORT_LOW_LATENCY_TYPE && (SAMPLE_SUPPORT_UART_DMA_LLI_MODE))
+    config SAMPLE_SUPPORT_RATE_CONFIG_36B_1K
+        bool "Support SLE UART 36B INV=1K"
+        depends on (SAMPLE_SLE_SUPPORT_LOW_LATENCY_TYPE && (SAMPLE_SUPPORT_UART_DMA_RAW_DATA_MODE && UART_SUPPORT_FLOW_CTRL))
+    config SAMPLE_SUPPORT_RATE_CONFIG_36B_2K
+        bool "Support SLE UART 36B INV=2K"
+        depends on (SAMPLE_SLE_SUPPORT_LOW_LATENCY_TYPE && (SAMPLE_SUPPORT_UART_DMA_LLI_MODE || SAMPLE_SUPPORT_UART_READ_BY_DMA_MODE))
+endchoice
+endmenu
+
+menu "Select UART Config"
+choice "Select UART Mode"
+    prompt "Choice Target UART DMA Sample Mode"
+    default SAMPLE_SUPPORT_UART_DMA_LLI_MODE
+    config SAMPLE_SUPPORT_UART_DMA_RAW_DATA_MODE
+        bool 
+        prompt "Uart Dma Raw Data Mode"
+
+    config SAMPLE_SUPPORT_UART_DMA_LLI_MODE
+        bool
+        prompt "Uart Dma LLI Mode"
+
+    config SAMPLE_SUPPORT_UART_READ_BY_DMA_MODE
+        bool
+        prompt "Uart Dma Read By Dma Mode"
+
+endchoice
+
+config SLE_UART_DMA_BUS_ID
+    int
+    prompt "Choose UART bus id."
+    depends on SAMPLE_SUPPORT_SLE_UART_DMA
+    default 1
+
+config SLE_UART_DMA_MAX_MSG_LEN
+    int
+    prompt "Set uart message max length by DMA lli."
+    default 330
+    depends on SAMPLE_SUPPORT_SLE_UART_DMA
+    help
+        This option means the max length of transfer by DMA lli.
+endmenu

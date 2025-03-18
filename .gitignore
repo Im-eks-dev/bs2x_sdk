@@ -1,0 +1,22 @@
+
+# vscode
+.vscode/
+*.code-workspace
+
+# temporary
+/temp/
+__pycache__/
+
+# sdk
+/output/
+
+interim_binary/bs21/bin/nv/standard-bs21-n1100/bs21_all_nv.bin
+interim_binary/bs21e/bin/nv/standard-bs21e-1100e/bs21e_all_nv.bin
+
+tools/pkg/fwpkg/bs21/bs21_all.fwpkg
+tools/pkg/fwpkg/bs21e/bs21e_all.fwpkg
+
+interim_binary/**/flashboot_sign_a.bin
+interim_binary/**/flashboot_sign_b.bin
+
+tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_fp/lib/sec/libsec_image.so

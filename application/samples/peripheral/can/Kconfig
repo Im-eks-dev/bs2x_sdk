@@ -1,0 +1,16 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2024-2024. All rights reserved.
+#===============================================================================
+config CAN_SAMPLE_ENABLE_LOOPBACK
+    int
+    prompt "Choose CAN work in loopback mode."
+    range 0 1
+    default 0
+    depends on SAMPLE_SUPPORT_CAN
+
+config CAN_SAMPLE_ENABLE_BUS_LOAD_TEST
+    bool
+    prompt "CAN BUS Load rate test sample."
+    default n
+    depends on SAMPLE_SUPPORT_CAN

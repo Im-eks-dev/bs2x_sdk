@@ -1,0 +1,41 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+config PDM_CLK_PIN
+    int
+    prompt "Choose PDM CLK pin."
+    depends on SAMPLE_SUPPORT_PDM
+    default 23
+
+config PDM_DIN_PIN
+    int
+    prompt "Choose PDM DIN pin."
+    depends on SAMPLE_SUPPORT_PDM
+    default 22
+
+config PDM_CLK_PIN_MODE
+    int
+    prompt "Choose PDM CLK pin mode."
+    default 34
+    depends on SAMPLE_SUPPORT_PDM
+
+config PDM_DIN_PIN_MODE
+    int
+    prompt "Choose PDM DIN pin mode."
+    default 33
+    depends on SAMPLE_SUPPORT_PDM
+
+config PDM_TRANSFER_LEN_BY_DMA
+    int
+    prompt "Set the length of transfer by DMA."
+    default 128
+    help
+        This option means the length of transfer by DMA.
+
+config PDM_MAX_RECORD_DATA
+    hex
+    prompt "Set the max recorder size by PDM."
+    default 7800
+    help
+        This option means the max recorder size by PDM.

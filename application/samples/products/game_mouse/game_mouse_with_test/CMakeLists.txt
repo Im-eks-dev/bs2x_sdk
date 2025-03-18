@@ -1,0 +1,8 @@
+if(DEFINED CONFIG_SAMPLE_OF_GAME_MOUSE_WITH_TEST)
+set(SOURCES_LIST
+    ${CMAKE_CURRENT_SOURCE_DIR}/usb_init_app.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/sle_mouse_dongle.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/app_mp_test_mode.c
+)
+endif()
+set(SOURCES "${SOURCES}" ${SOURCES_LIST} PARENT_SCOPE)

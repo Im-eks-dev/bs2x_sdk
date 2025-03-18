@@ -1,0 +1,31 @@
+config TIOT_SLAVE_DEV_NUM
+    int "tiot slave device number."
+    range 1 1
+    default 1
+
+choice
+    prompt "Transmit Type."
+    default TIOT_SLAVE_UART
+    config TIOT_SLAVE_UART
+        bool "UART"
+        select XMIT_WITH_UART
+        select XFER_PACKET_TIOT
+endchoice
+
+config TIOT_SLAVE_UART_BAUDRATE
+    int "UART communication baudrate."
+    range 115200 2500000
+    default 115200
+    depends on TIOT_SLAVE_UART
+
+config TIOT_SLAVE_UART_WITH_FLOWCTRL
+    bool "UART with hardware flow control(CTS&RTS)."
+    default n
+    depends on TIOT_SLAVE_UART
+
+if !BOARD_DYNAMIC_ALLOC
+config TIOT_SLAVE_PACKET_BUFF_MAX
+    int "Static buffer size."
+    range 400 6000
+    default 5000
+endif

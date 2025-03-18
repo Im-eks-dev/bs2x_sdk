@@ -1,0 +1,45 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+config UART_BUS_ID
+    int
+    prompt "Choose UART bus id."
+    depends on SAMPLE_SUPPORT_UART
+    default 1
+
+config UART_TXD_PIN
+    int
+    prompt "Choose UART TXD pin."
+    depends on SAMPLE_SUPPORT_UART
+    default 17
+
+config UART_RXD_PIN
+    int
+    prompt "Choose UART RXD pin."
+    depends on SAMPLE_SUPPORT_UART
+    default 18
+
+config UART_TXD_PIN_MODE
+    int
+    prompt "Choose UART TXD pin mode."
+    depends on SAMPLE_SUPPORT_UART
+    default 25
+
+config UART_RXD_PIN_MODE
+    int
+    prompt "Choose UART RXD pin mode."
+    depends on SAMPLE_SUPPORT_UART
+    default 24
+
+config UART_SUPPORT_INT_MODE
+    bool
+    prompt "UART support interrupt mode."
+    depends on SAMPLE_SUPPORT_UART
+    default n
+
+config UART_TRANSFER_SIZE
+    int
+    prompt "Config UART transfer size."
+    depends on SAMPLE_SUPPORT_UART
+    default 64

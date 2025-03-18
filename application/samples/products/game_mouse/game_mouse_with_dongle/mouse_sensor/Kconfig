@@ -1,0 +1,19 @@
+#===============================================================================
+# @brief    Kconfig file.
+#Copyright (c) @CompanyNameMagicTag 2023-2024. All rights reserved.
+#===============================================================================
+
+choice
+    prompt "Select sensor number"
+    default GAME_MOUSE_SUPPORT_SENSOR_3395
+    config GAME_MOUSE_SUPPORT_SENSOR_3395
+        bool "Select sensor paw3395."
+    config GAME_MOUSE_SUPPORT_SENSOR_3311
+        bool "Select sensor paw3311."
+    config GAME_MOUSE_SUPPORT_SENSOR_3805
+        bool "Select sensor paw3805."
+    config GAME_MOUSE_SUPPORT_SENSOR_3325
+        bool "Select sensor pwm3325"
+    config GAME_MOUSE_SUPPORT_SENSOR_3950
+        bool "Select sensor pwm3950"
+endchoice

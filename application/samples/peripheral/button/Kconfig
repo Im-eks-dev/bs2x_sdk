@@ -1,0 +1,9 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2024-2024. All rights reserved.
+#===============================================================================
+config SAMPLE_BUTTON_PIN
+    int
+    prompt "Choose BUTTON pin."
+    depends on SAMPLE_SUPPORT_BUTTON
+    default 29

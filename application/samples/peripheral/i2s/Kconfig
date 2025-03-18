@@ -1,0 +1,37 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+config SAMPLE_SUPPORT_I2S_MASTER
+    bool
+    prompt "Support I2S Master Sample."
+    default n
+    depends on SAMPLE_SUPPORT_I2S
+    help
+        This option means support I2S Master Sample.
+
+config I2S_MASTER_BUS_ID
+    int
+    prompt "Choose I2S master bus id."
+    depends on SAMPLE_SUPPORT_I2S_MASTER
+    default 0
+
+config SAMPLE_SUPPORT_I2S_SLAVE
+    bool
+    prompt "Support I2S Slave Sample."
+    default n
+    depends on SAMPLE_SUPPORT_I2S
+    help
+        This option means support I2S Slave Sample.
+
+config I2S_SLAVE_BUS_ID
+    int
+    prompt "Choose I2S slave bus id."
+    depends on SAMPLE_SUPPORT_I2S_SLAVE
+    default 0
+
+config I2S_TRANSFER_LEN
+    int
+    prompt "Choose I2S transfer length."
+    depends on SAMPLE_SUPPORT_I2S
+    default 32

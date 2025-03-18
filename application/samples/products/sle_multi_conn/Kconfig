@@ -1,0 +1,229 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+
+choice
+    prompt "Select sle multi_conn type"
+    default SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    config SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+        bool "Enable SLE MULTI_CONN Server sample."
+    config SAMPLE_SUPPORT_SLE_MULTI_CONN_CLIENT
+        bool "Enable SLE MULTI_CONN Client sample."
+endchoice
+
+config SLE_MTU_LENGTH
+    int
+    prompt "Set the length of mtu."
+    range 251 520
+    default 300
+    depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_CLIENT
+    help
+        This option means the length of mtu.
+
+config SLE_MULTI_CONN_NUM
+    int
+    prompt "Set the count of device in sle multi_conn."
+    range 1 8
+    default 4
+    help
+        This option means the num of sle multi_conn.
+
+
+config SLE_MULTI_CONN_UART_BUS
+    int
+    prompt "Set the UART BUS of the currrent sample."
+    default 0
+    depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_CLIENT
+    help
+        This option means the UART BUS of the currrent sample.
+
+config SLE_MULTI_CONN_CLIENT_ADDR
+    hex
+    default 0x0A0A0A0A0A0A
+    prompt "Set the target sle client mac-addr."
+    depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_CLIENT
+    help
+        This option means the addr of the sle client.
+
+if SLE_MULTI_CONN_NUM >= 1
+    config SLE_MULTI_CONN_SERVER0_ADDR
+        hex
+        default 0x080102030410
+        prompt "Set the target sle server0 mac-addr of wanting to connect."
+        help
+            This option means the addr of tartget server wanting to connect.
+    
+endif
+if SLE_MULTI_CONN_NUM >= 2
+    config SLE_MULTI_CONN_SERVER1_ADDR
+        hex
+        default 0x080102030411
+        prompt "Set the target sle server1 mac-addr of wanting to connect."
+        help
+            This option means the addr of tartget server wanting to connect.
+    
+endif
+if SLE_MULTI_CONN_NUM >= 3
+    config SLE_MULTI_CONN_SERVER2_ADDR
+        hex
+        default 0x080102030412
+        prompt "Set the target sle server2 mac-addr of wanting to connect."
+        help
+            This option means the addr of tartget server wanting to connect.
+    
+endif
+if SLE_MULTI_CONN_NUM >= 4
+    config SLE_MULTI_CONN_SERVER3_ADDR
+        hex
+        default 0x080102030413
+        prompt "Set the target sle server3 mac-addr of wanting to connect."
+        help
+            This option means the addr of tartget server wanting to connect.
+    
+endif
+if SLE_MULTI_CONN_NUM >= 5
+    config SLE_MULTI_CONN_SERVER4_ADDR
+        hex
+        default 0x080102030414
+        prompt "Set the target sle server4 mac-addr of wanting to connect."
+        help
+            This option means the addr of tartget server wanting to connect.
+    
+endif
+if SLE_MULTI_CONN_NUM >= 6
+    config SLE_MULTI_CONN_SERVER5_ADDR
+        hex
+        default 0x080102030415
+        prompt "Set the target sle server5 mac-addr of wanting to connect."
+        help
+            This option means the addr of tartget server wanting to connect.
+    
+endif
+if SLE_MULTI_CONN_NUM >= 7
+    config SLE_MULTI_CONN_SERVER6_ADDR
+        hex
+        default 0x080102030416
+        prompt "Set the target sle server6 mac-addr of wanting to connect."
+        help
+            This option means the addr of tartget server wanting to connect.
+    
+endif
+if SLE_MULTI_CONN_NUM >= 8
+    config SLE_MULTI_CONN_SERVER7_ADDR
+        hex
+        default 0x080102030417
+        prompt "Set the target sle server7 mac-addr of wanting to connect."
+        help
+            This option means the addr of tartget server wanting to connect.
+    
+endif
+
+config CURRENT_SERVER_INDEX
+    int
+    prompt "Select sle current server address profile index."
+    range 0 SLE_MULTI_CONN_NUM
+    default 0
+    depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+
+
+
+
+if CURRENT_SERVER_INDEX = 0
+    config CURRENT_SERVER_ADDR
+        hex
+        prompt "set the MAC-ADDR of the current sle server."
+        default SLE_MULTI_CONN_SERVER0_ADDR
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    config SLE_MULTI_CONN_SERVER_NAME
+        string
+        prompt "set the name of sle server."
+        default "sle_server0"
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+endif
+if CURRENT_SERVER_INDEX = 1
+    config CURRENT_SERVER_ADDR
+        hex
+        prompt "set the MAC-ADDR of the current sle server."
+        default SLE_MULTI_CONN_SERVER1_ADDR
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    config SLE_MULTI_CONN_SERVER_NAME
+        string
+        prompt "set the name of sle server."
+        default "sle_server1"
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+endif
+if CURRENT_SERVER_INDEX = 2
+    config CURRENT_SERVER_ADDR
+        hex
+        prompt "set the MAC-ADDR of the current sle server."
+        default SLE_MULTI_CONN_SERVER2_ADDR
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    config SLE_MULTI_CONN_SERVER_NAME
+        string
+        prompt "set the name of sle server."
+        default "sle_server2"
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+endif
+if CURRENT_SERVER_INDEX = 3
+    config CURRENT_SERVER_ADDR
+        hex
+        prompt "set the MAC-ADDR of the current sle server."
+        default SLE_MULTI_CONN_SERVER3_ADDR
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    config SLE_MULTI_CONN_SERVER_NAME
+        string
+        prompt "set the name of sle server."
+        default "sle_server3"
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+endif
+if CURRENT_SERVER_INDEX = 4
+    config CURRENT_SERVER_ADDR
+        hex
+        prompt "set the MAC-ADDR of the current sle server."
+        default SLE_MULTI_CONN_SERVER4_ADDR
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    config SLE_MULTI_CONN_SERVER_NAME
+        string
+        prompt "set the name of sle server."
+        default "sle_server4"
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+endif
+if CURRENT_SERVER_INDEX = 5
+    config CURRENT_SERVER_ADDR
+        hex
+        prompt "set the MAC-ADDR of the current sle server."
+        default SLE_MULTI_CONN_SERVER5_ADDR
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    config SLE_MULTI_CONN_SERVER_NAME
+        string
+        prompt "set the name of sle server."
+        default "sle_server5"
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+endif
+if CURRENT_SERVER_INDEX = 6
+    config CURRENT_SERVER_ADDR
+        hex
+        prompt "set the MAC-ADDR of the current sle server."
+        default SLE_MULTI_CONN_SERVER6_ADDR
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    config SLE_MULTI_CONN_SERVER_NAME
+        string
+        prompt "set the name of sle server."
+        default "sle_server6"
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+endif
+
+if CURRENT_SERVER_INDEX = 7
+    config CURRENT_SERVER_ADDR
+        hex
+        prompt "set the MAC-ADDR of the current sle server."
+        default SLE_MULTI_CONN_SERVER7_ADDR
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+    config SLE_MULTI_CONN_SERVER_NAME
+        string
+        prompt "set the name of sle server."
+        default "sle_server7"
+        depends on SAMPLE_SUPPORT_SLE_MULTI_CONN_SERVER
+endif

@@ -1,0 +1,20 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) HiSilicon (Shanghai) Technologies Co., Ltd. 2023-2023. All rights reserved.
+#===============================================================================
+
+choice
+    prompt "Select sle keyboard type"
+    default SAMPLE_SUPPORT_SLE_KEYBOARD
+    config SAMPLE_SUPPORT_SLE_KEYBOARD
+        bool "Enable SLE KEYBOARD sample."
+    config SAMPLE_SUPPORT_SLE_KEYBOARD_DONGLE
+        bool "Enable SLE KEYBOARD Dongle sample."
+endchoice
+
+config SAMPLE_SUPPORT_SLE_OTA
+    bool
+    prompt "Enable sle ota."
+    default n
+    help
+        This option means support SLE keyboard Sample.

@@ -1,0 +1,41 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2024-2024. All rights reserved.
+#===============================================================================
+config SAMPLE_SUPPORT_IR_STUDY
+    bool
+    prompt "Enable IR study."
+    default n
+    depends on DRIVER_SUPPORT_IR
+    help
+        This option means the IR study.
+
+config SAMPLE_IR_SEND_PIN
+    int
+    prompt "Choose ir send pin."
+    depends on DRIVER_SUPPORT_IR
+    default 29
+
+config SAMPLE_IR_STUDY_PIN
+    int
+    prompt "Choose ir study pin."
+    depends on SAMPLE_SUPPORT_IR_STUDY
+    default 28
+
+config IR_STUDY_RX_IN
+    int
+    prompt "Choose ir study RX IN channel."
+    depends on SAMPLE_SUPPORT_IR_STUDY
+    default 4
+
+config IR_STUDY_RX_OUT
+    int
+    prompt "Choose ir study RX OUT channel."
+    depends on SAMPLE_SUPPORT_IR_STUDY
+    default 5
+
+config IR_STUDY_MIC_N
+    int
+    prompt "Choose ir study MIC_N channel."
+    depends on SAMPLE_SUPPORT_IR_STUDY
+    default 6

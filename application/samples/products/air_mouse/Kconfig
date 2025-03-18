@@ -1,0 +1,242 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2024. All rights reserved.
+#===============================================================================
+
+choice
+    prompt "Select AIR MOUSE type"
+    default SAMPLE_SUPPORT_AIR_MOUSE
+    config SAMPLE_SUPPORT_AIR_MOUSE
+        bool "Enable AIR MOUSE sample."
+    config SAMPLE_SUPPORT_AIR_MOUSE_DONGLE
+        bool "Enable AIR MOUSE Dongle sample."
+        choice
+            prompt "Select Dongle type"
+            depends on SAMPLE_SUPPORT_AIR_MOUSE_DONGLE
+            default AIR_MOUSE_DONGLE_RELATIVE_COORDINATES
+            config AIR_MOUSE_DONGLE_RELATIVE_COORDINATES
+                bool "Switch to relative coordinates"
+            config AIR_MOUSE_DONGLE_ABSOLUTE_COORDINATES
+                bool "Switch to absolute coordinates"
+            config AIR_MOUSE_DONGLE_FACTORY_PHASE_CALI
+                bool "Switch to factory phase cali"
+            config AIR_MOUSE_DONGLE_FACTORY_SCREEN_TEST
+                bool "Switch to factory screen test"
+        endchoice
+endchoice
+
+choice
+    prompt "Select AIR MOUSE board"
+    default AIR_MOUSE_SELF_BOARD
+    config AIR_MOUSE_SELF_BOARD
+        bool "Self Board."
+    config AIR_MOUSE_HR_BOARD
+        bool "HR Board."
+endchoice
+
+config SAMPLE_SUPPORT_AIR_MOUSE_OTA
+    bool
+    default n
+    prompt "Enable OTA service."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE
+    help
+        This option means support SLE OTA service.
+
+
+config LOW_POWER_MODE
+    hex
+    default 0
+    prompt "SLE SLP Low_Power 0-Disable 1-Enable."
+    help
+        This option means support SLE and SLP low power mode.
+
+config SLE_DONGLE_SERVER_ADDR0
+    hex
+    default 0x0A
+    prompt "Set the sle server addr[0]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_DONGLE
+config SLE_DONGLE_SERVER_ADDR1
+    hex
+    default 0x01
+    prompt "Set the sle server addr[1]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_DONGLE
+config SLE_DONGLE_SERVER_ADDR2
+    hex
+    default 0x02
+    prompt "Set the sle server addr[2]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_DONGLE
+config SLE_DONGLE_SERVER_ADDR3
+    hex
+    default 0x03
+    prompt "Set the sle server addr[3]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_DONGLE
+config SLE_DONGLE_SERVER_ADDR4
+    hex
+    default 0x04
+    prompt "Set the sle server addr[4]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_DONGLE
+config SLE_DONGLE_SERVER_ADDR5
+    hex
+    default 0x05
+    prompt "Set the sle server addr[5]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_DONGLE
+
+config SLE_MOUSE_SERVER_ADDR0
+    hex
+    default 0x0A
+    prompt "Set the sle server addr[0]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE
+config SLE_MOUSE_SERVER_ADDR1
+    hex
+    default 0x01
+    prompt "Set the sle server addr[1]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE
+config SLE_MOUSE_SERVER_ADDR2
+    hex
+    default 0x02
+    prompt "Set the sle server addr[2]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE
+config SLE_MOUSE_SERVER_ADDR3
+    hex
+    default 0x03
+    prompt "Set the sle server addr[3]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE
+config SLE_MOUSE_SERVER_ADDR4
+    hex
+    default 0x04
+    prompt "Set the sle server addr[4]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE
+config SLE_MOUSE_SERVER_ADDR5
+    hex
+    default 0x05
+    prompt "Set the sle server addr[5]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE
+
+config SLE_DONGLE_SERVER_ADDR0
+    hex
+    default 0x0A
+    prompt "Set the sle server addr[0]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_GOLDEN_DONGLE
+config SLE_DONGLE_SERVER_ADDR1
+    hex
+    default 0x01
+    prompt "Set the sle server addr[1]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_GOLDEN_DONGLE
+config SLE_DONGLE_SERVER_ADDR2
+    hex
+    default 0x02
+    prompt "Set the sle server addr[2]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_GOLDEN_DONGLE
+config SLE_DONGLE_SERVER_ADDR3
+    hex
+    default 0x03
+    prompt "Set the sle server addr[3]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_GOLDEN_DONGLE
+config SLE_DONGLE_SERVER_ADDR4
+    hex
+    default 0x04
+    prompt "Set the sle server addr[4]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_GOLDEN_DONGLE
+config SLE_DONGLE_SERVER_ADDR5
+    hex
+    default 0x05
+    prompt "Set the sle server addr[5]."
+    depends on SAMPLE_SUPPORT_AIR_MOUSE_GOLDEN_DONGLE
+
+config AIR_MOUSE_UART_TX_PIN
+    int
+    default 26
+    range 26 26
+    prompt "Set the uart tx pin num."
+    depends on AIR_MOUSE_HR_BOARD
+config AIR_MOUSE_UART_RX_PIN
+    int
+    default 27
+    range 27 27
+    prompt "Set the uart rx pin num."
+    depends on AIR_MOUSE_HR_BOARD
+config AIR_MOUSE_UART_CTS_PIN
+    int
+    default 28
+    range 28 28
+    prompt "Set the uart cts pin num."
+    depends on AIR_MOUSE_HR_BOARD
+config AIR_MOUSE_UART_RTS_PIN
+    int
+    default 29
+    range 29 29
+    prompt "Set the uart rts pin num."
+    depends on AIR_MOUSE_HR_BOARD
+config AIR_MOUSE_POWER_ON_PIN
+    int
+    default 12
+    range 12 12
+    prompt "Set the slp power on pin num."
+    depends on AIR_MOUSE_HR_BOARD
+config AIR_MOUSE_DEV_WAKEUP_HOST_PIN
+    int
+    default 15
+    range 15 15
+    prompt "Set the dev wakeup host pin num."
+    depends on AIR_MOUSE_HR_BOARD
+config AIR_MOUSE_SYNC_PIN
+    int
+    default 10
+    range 10 10
+    prompt "Set the sync pin num."
+    depends on AIR_MOUSE_HR_BOARD
+config AIR_MOUSE_IMU_INT2_PIN
+    int
+    default 14
+    range 14 14
+    prompt "Set the imu int2 pin num."
+    depends on AIR_MOUSE_HR_BOARD
+
+config AIR_MOUSE_UART_TX_PIN
+    int
+    default 30
+    range 30 30
+    prompt "Set the uart tx pin num."
+    depends on AIR_MOUSE_SELF_BOARD
+config AIR_MOUSE_UART_RX_PIN
+    int
+    default 31
+    range 31 31
+    prompt "Set the uart rx pin num."
+    depends on AIR_MOUSE_SELF_BOARD
+config AIR_MOUSE_UART_CTS_PIN
+    int
+    default 3
+    range 3 3
+    prompt "Set the uart cts pin num."
+    depends on AIR_MOUSE_SELF_BOARD
+config AIR_MOUSE_UART_RTS_PIN
+    int
+    default 4
+    range 4 4
+    prompt "Set the uart rts pin num."
+    depends on AIR_MOUSE_SELF_BOARD
+config AIR_MOUSE_POWER_ON_PIN
+    int
+    default 26
+    range 26 26
+    prompt "Set the slp power on pin num."
+    depends on AIR_MOUSE_SELF_BOARD
+config AIR_MOUSE_DEV_WAKEUP_HOST_PIN
+    int
+    default 29
+    range 29 29
+    prompt "Set the dev wakeup host pin num."
+    depends on AIR_MOUSE_SELF_BOARD
+config AIR_MOUSE_SYNC_PIN
+    int
+    default 5
+    range 5 5
+    prompt "Set the sync pin num."
+    depends on AIR_MOUSE_SELF_BOARD
+config AIR_MOUSE_IMU_INT2_PIN
+    int
+    default 32
+    range 32 32
+    prompt "Set the imu int2 pin num."
+    depends on AIR_MOUSE_SELF_BOARD

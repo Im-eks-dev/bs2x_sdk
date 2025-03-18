@@ -1,0 +1,139 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2023-2023. All rights reserved.
+#===============================================================================
+config SAMPLE_SUPPORT_SPI_MASTER
+    bool
+    prompt "Support SPI Master Sample."
+    default n
+    depends on SAMPLE_SUPPORT_SPI
+    help
+        This option means support SPI Master Sample.
+
+config SPI_MASTER_BUS_ID
+    int
+    prompt "Choose SPI master bus id."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default 1
+
+config SPI_MASTER_CLK_PIN
+    int
+    prompt "Choose SPI master CLK pin."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default 13
+
+config SPI_MASTER_CS_PIN
+    int
+    prompt "Choose SPI master CS pin."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default 14
+
+config SPI_MASTER_DI_PIN
+    int
+    prompt "Choose SPI master DI pin."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default 15
+
+config SPI_MASTER_DO_PIN
+    int
+    prompt "Choose SPI master DO pin."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default 16
+
+config SPI_MASTER_CLK_PIN_MODE
+    int
+    prompt "Choose SPI master CLK pin mode."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default 10
+
+config SPI_MASTER_CS_PIN_MODE
+    int
+    prompt "Choose SPI master CS pin mode."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default 8
+
+config SPI_MASTER_DI_PIN_MODE
+    int
+    prompt "Choose SPI master DI pin mode."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default 6
+
+config SPI_MASTER_DO_PIN_MODE
+    int
+    prompt "Choose SPI master DO pin mode."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default 7
+
+config SAMPLE_SUPPORT_SPI_SLAVE
+    bool
+    prompt "Support SPI Slave Sample."
+    default n
+    depends on SAMPLE_SUPPORT_SPI
+    help
+        This option means support SPI Slave Sample.
+
+config SPI_SLAVE_BUS_ID
+    int
+    prompt "Choose SPI slave bus id."
+    depends on SAMPLE_SUPPORT_SPI_SLAVE
+    default 1
+
+config SPI_SLAVE_CLK_PIN
+    int
+    prompt "Choose SPI slave CLK pin."
+    depends on SAMPLE_SUPPORT_SPI_SLAVE
+    default 13
+
+config SPI_SLAVE_CS_PIN
+    int
+    prompt "Choose SPI slave CS pin."
+    depends on SAMPLE_SUPPORT_SPI_SLAVE
+    default 14
+
+config SPI_SLAVE_DI_PIN
+    int
+    prompt "Choose SPI slave DI pin."
+    depends on SAMPLE_SUPPORT_SPI_SLAVE
+    default 15
+
+config SPI_SLAVE_DO_PIN
+    int
+    prompt "Choose SPI slave DO pin."
+    depends on SAMPLE_SUPPORT_SPI_SLAVE
+    default 16
+
+config SPI_SLAVE_CLK_PIN_MODE
+    int
+    prompt "Choose SPI slave CLK pin mode."
+    depends on SAMPLE_SUPPORT_SPI_SLAVE
+    default 10
+
+config SPI_SLAVE_CS_PIN_MODE
+    int
+    prompt "Choose SPI slave CS pin mode."
+    depends on SAMPLE_SUPPORT_SPI_SLAVE
+    default 8
+
+config SPI_SLAVE_DI_PIN_MODE
+    int
+    prompt "Choose SPI slave DI pin mode."
+    depends on SAMPLE_SUPPORT_SPI_SLAVE
+    default 6
+
+config SPI_SLAVE_DO_PIN_MODE
+    int
+    prompt "Choose SPI slave DO pin mode."
+    depends on SAMPLE_SUPPORT_SPI_SLAVE
+    default 7
+
+config SPI_TRANSFER_LEN
+    int
+    prompt "Choose SPI transfer length."
+    depends on SAMPLE_SUPPORT_SPI
+    default 16
+
+config SPI_SUPPORT_WRITEREAD
+    bool
+    prompt "SPI support use writeread interface test."
+    depends on SAMPLE_SUPPORT_SPI_MASTER
+    default n

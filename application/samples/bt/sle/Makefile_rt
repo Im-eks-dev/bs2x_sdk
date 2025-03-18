@@ -1,0 +1,41 @@
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+mkfile_dir := $(dir $(mkfile_path))
+top_dir := $(mkfile_dir)/../../../../
+
+include $(WSCFG_KCONFIG_CONFIG)
+
+MD_PRE_OPTS:=
+MD_INC_LIST:=
+MD_SRC_LIST:=
+include $(mkfile_dir)/$(DIR_MAP_CONFIG_FILE)
+include $(SLE_CONFIG_PATH)/$(OS_TYPE)/inc.mk
+
+MD_SRC_LIST += $(mkfile_dir)/sle_uart/sle_uart.c
+MD_SRC_LIST += $(mkfile_dir)/sle_uart/sle_uart_client/sle_uart_client.c
+MD_SRC_LIST += $(mkfile_dir)/sle_uart/sle_uart_server/sle_uart_server_adv.c
+MD_SRC_LIST += $(mkfile_dir)/sle_uart/sle_uart_server/sle_uart_server.c
+
+_INCLUDES :=
+MD_INC_LIST += $(PLATFORM_HCC_DIR)/cfg
+MD_INC_LIST += $(PLATFORM_HCC_DIR)/comm
+MD_INC_LIST += $(PLATFORM_HCC_DIR)/host
+MD_INC_LIST += $(PLATFORM_HCC_DIR)
+MD_INC_LIST += $(PLATFORM_HCC_DIR)/inc
+MD_INC_LIST += $(PLATFORM_OSAL_DIR)/include
+MD_INC_LIST += $(PLATFORM_LIBC_SEC_DIR)/include
+
+MD_INC_LIST += $(MIDDLEWARE_SLE)
+MD_INC_LIST += $(BSLE_INC_DIR)/sle
+
+MD_INC_LIST += $(mkfile_dir)/sle_uart/sle_uart_client
+MD_INC_LIST += $(mkfile_dir)/sle_uart/sle_uart_server
+
+MD_INC_LIST += $(addprefix $(ROOT_DIR)/,$(MD_INCLUDE_LIST))
+
+MD_PRE_OPTS += -D CONFIG_FREE_RTOS_ENABLE=1
+MD_PRE_OPTS += -D __FREERTOS__=1
+MD_PRE_OPTS += -D CONFIG_SAMPLE_SUPPORT_SLE_UART_SERVER=1
+
+MD_INC_LIST_ABS=$(abspath $(MD_INC_LIST))
+LMD_CFLGAS = $(MD_PRE_OPTS) $(addprefix -I,$(MD_INC_LIST_ABS)) -include $(WSCFG_AUTOCONFIG_H)
+LMD_SRC_LIST = $(MD_SRC_LIST)

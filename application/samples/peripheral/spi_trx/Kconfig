@@ -1,0 +1,147 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) @CompanyNameMagicTag 2025-2025. All rights reserved.
+#===============================================================================
+config SAMPLE_SUPPORT_SPI_TRX_PERFORMANCE_TEST
+    bool
+    prompt "Support SPI TRX performance test."
+    default n
+    depends on SAMPLE_SUPPORT_SPI_TRX
+    help
+        This option means support SPI TRX performance test.
+
+config SPI_TRX_TEST_TOTAL_LEN
+    int
+    prompt "Choose SPI TRX Total Len."
+    depends on SAMPLE_SUPPORT_SPI_TRX_PERFORMANCE_TEST
+    default 160
+
+config SAMPLE_SUPPORT_SPI_TRX_MASTER
+    bool
+    prompt "Support SPI TRX Master Sample."
+    default n
+    depends on SAMPLE_SUPPORT_SPI_TRX
+    help
+        This option means support SPI TRX Master Sample.
+
+config SPI_TRX_MASTER_BUS_ID
+    int
+    prompt "Choose SPI TRX master bus id."
+    depends on SAMPLE_SUPPORT_SPI_TRX_MASTER
+    default 1
+
+config SPI_TRX_MASTER_CLK_PIN
+    int
+    prompt "Choose SPI TRX master CLK pin."
+    depends on SAMPLE_SUPPORT_SPI_TRX_MASTER
+    default 13
+
+config SPI_TRX_MASTER_CS_PIN
+    int
+    prompt "Choose SPI TRX master CS pin."
+    depends on SAMPLE_SUPPORT_SPI_TRX_MASTER
+    default 14
+
+config SPI_TRX_MASTER_DI_PIN
+    int
+    prompt "Choose SPI TRX master DI pin."
+    depends on SAMPLE_SUPPORT_SPI_TRX_MASTER
+    default 15
+
+config SPI_TRX_MASTER_DO_PIN
+    int
+    prompt "Choose SPI TRX master DO pin."
+    depends on SAMPLE_SUPPORT_SPI_TRX_MASTER
+    default 16
+
+config SPI_TRX_MASTER_CLK_PIN_MODE
+    int
+    prompt "Choose SPI TRX master CLK pin mode."
+    depends on SAMPLE_SUPPORT_SPI_TRX_MASTER
+    default 10
+
+config SPI_TRX_MASTER_CS_PIN_MODE
+    int
+    prompt "Choose SPI TRX master CS pin mode."
+    depends on SAMPLE_SUPPORT_SPI_TRX_MASTER
+    default 8
+
+config SPI_TRX_MASTER_DI_PIN_MODE
+    int
+    prompt "Choose SPI TRX master DI pin mode."
+    depends on SAMPLE_SUPPORT_SPI_TRX_MASTER
+    default 6
+
+config SPI_TRX_MASTER_DO_PIN_MODE
+    int
+    prompt "Choose SPI TRX master DO pin mode."
+    depends on SAMPLE_SUPPORT_SPI_TRX_MASTER
+    default 7
+
+config SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    bool
+    prompt "Support SPI TRX Slave Sample."
+    default n
+    depends on SAMPLE_SUPPORT_SPI_TRX
+    help
+        This option means support SPI TRX Slave Sample.
+
+config SPI_TRX_SLAVE_BUS_ID
+    int
+    prompt "Choose SPI TRX slave bus id."
+    depends on SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    default 1
+
+config SPI_TRX_SLAVE_CLK_PIN
+    int
+    prompt "Choose SPI TRX slave CLK pin."
+    depends on SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    default 13
+
+config SPI_TRX_SLAVE_CS_PIN
+    int
+    prompt "Choose SPI TRX slave CS pin."
+    depends on SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    default 14
+
+config SPI_TRX_SLAVE_DI_PIN
+    int
+    prompt "Choose SPI TRX slave DI pin."
+    depends on SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    default 15
+
+config SPI_TRX_SLAVE_DO_PIN
+    int
+    prompt "Choose SPI TRX slave DO pin."
+    depends on SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    default 16
+
+config SPI_TRX_SLAVE_CLK_PIN_MODE
+    int
+    prompt "Choose SPI TRX slave CLK pin mode."
+    depends on SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    default 10
+
+config SPI_TRX_SLAVE_CS_PIN_MODE
+    int
+    prompt "Choose SPI TRX slave CS pin mode."
+    depends on SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    default 8
+
+config SPI_TRX_SLAVE_DI_PIN_MODE
+    int
+    prompt "Choose SPI TRX slave DI pin mode."
+    depends on SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    default 6
+
+config SPI_TRX_SLAVE_DO_PIN_MODE
+    int
+    prompt "Choose SPI TRX slave DO pin mode."
+    depends on SAMPLE_SUPPORT_SPI_TRX_SLAVE
+    default 7
+
+config SPI_TRX_TRANSFER_LEN
+    int
+    prompt "Choose SPI TRX transfer length."
+    depends on SAMPLE_SUPPORT_SPI_TRX
+    default 16

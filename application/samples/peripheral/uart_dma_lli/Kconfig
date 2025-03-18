@@ -1,0 +1,57 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) HiSilicon (Shanghai) Technologies Co., Ltd. 2024-2024. All rights reserved.
+#===============================================================================
+config SAMPLE_SUPPORT_UART_DMA_LLI_MASTER
+    bool
+    prompt "Support UART Master Sample."
+    default y
+    depends on SAMPLE_SUPPORT_UART_DMA_LLI
+    help
+        This option means support UART Master Sample.
+
+config SAMPLE_SUPPORT_UART_DMA_LLI_SLAVE
+    bool
+    prompt "Support UART Slave Sample."
+    default n
+    depends on SAMPLE_SUPPORT_UART_DMA_LLI
+    help
+        This option means support UART Slave Sample.
+
+config UART_BUS_ID
+    int
+    prompt "Choose UART bus id."
+    depends on SAMPLE_SUPPORT_UART_DMA_LLI
+    default 2
+
+config UART_TXD_PIN
+    int
+    prompt "Choose UART TXD pin."
+    depends on SAMPLE_SUPPORT_UART_DMA_LLI
+    default 17
+
+config UART_RXD_PIN
+    int
+    prompt "Choose UART RXD pin."
+    depends on SAMPLE_SUPPORT_UART_DMA_LLI
+    default 18
+
+config UART_TXD_PIN_MODE
+    int
+    prompt "Choose UART TXD pin mode."
+    depends on SAMPLE_SUPPORT_UART_DMA_LLI
+    default 19
+
+config UART_RXD_PIN_MODE
+    int
+    prompt "Choose UART RXD pin mode."
+    depends on SAMPLE_SUPPORT_UART_DMA_LLI
+    default 21
+
+config UART_MSG_MAX_LEN_BY_DMA_LLI
+    int
+    prompt "Set uart message max length by DMA lli."
+    default 405
+    depends on SAMPLE_SUPPORT_UART_DMA_LLI
+    help
+        This option means the max length of transfer by DMA lli.

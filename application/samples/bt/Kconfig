@@ -1,0 +1,13 @@
+config SAMPLE_SUPPORT_BLE_SAMPLE
+    bool "Support BLE Sample."
+
+config SAMPLE_SUPPORT_SLE_SAMPLE
+    bool "Support SLE Sample"
+
+if SAMPLE_SUPPORT_BLE_SAMPLE
+osource "application/samples/bt/ble/Kconfig"
+endif
+
+if SAMPLE_SUPPORT_SLE_SAMPLE
+osource "application/samples/bt/sle/Kconfig"
+endif
