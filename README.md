@@ -2,9 +2,13 @@
 
 此仓库是 Hi2821 的半开源 sdk，且适配了 xfusion。
 
+此 sdk 基于：`BS2X_1.0.11`。
+
 sdk 中的 `application` 以源码的方式提供；其余文件夹以 `.a` 静态库 + 头文件的方式提供。
 
 关于 xfusion 的更多信息见：《[xfusion](https://github.com/x-eks-fusion/xfusion)》。
+
+## 注意：此分支现已过时，请使用最新的默认分支！
 
 ## Hi2821 简介
 
